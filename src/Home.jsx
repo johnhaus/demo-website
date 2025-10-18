@@ -1,33 +1,74 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import styled, { keyframes } from 'styled-components';
 import './App.css'
 
 function Home() {
   const [count, setCount] = useState(0)
 
+
+  const GreenText = styled.p`
+    color: green;
+  `;
+
+  const GreyText = styled.p`
+    color: #888;
+  `;
+
+  const LogoImage = styled.img`
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+    &:hover {
+      filter: drop-shadow(0 0 2em #646cffaa);
+    }
+  `;
+
+  const Card = styled.div `
+    padding: 2em;
+  `;
+
+  const rotate = keyframes`
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  `;
+
+  const Rotate = styled(LogoImage)`
+    animation: ${rotate} 20s linear infinite;
+    &:hover {
+      filter: drop-shadow(0 0 2em #61dafbaa);
+    }
+  `;
+
   return (
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+          <LogoImage src={viteLogo} alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <Rotate src={reactLogo} alt="React logo" />
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
+      <Card>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
+        <GreenText>
           Home Page
-        </p>
-      </div>
-      <p className="read-the-docs">
+        </GreenText>
+      </Card>
+      <GreyText>
         Click on the Vite and React logos to learn more
-      </p>
+      </GreyText>
     </>
   )
 }
