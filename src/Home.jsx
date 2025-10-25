@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import styled, { keyframes } from 'styled-components';
+import Header from './shared/header';
 
 const GreenText = styled.p`
     color: green;
@@ -47,6 +48,7 @@ function Home() {
 
   return (
     <>
+      <Header/>
       <div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <LogoImage src={viteLogo} alt="Vite logo" />
