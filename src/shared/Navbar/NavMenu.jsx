@@ -20,7 +20,6 @@ const NavLinks = styled.nav`
 
       transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
       opacity: ${({ open }) => (open ? 1 : 0)};
-      visibility: ${({ open }) => (open ? "visible" : "hidden")};
       transition: all 0.35s ease-in-out;
     }
   }
@@ -76,7 +75,6 @@ const StyledNavLink = styled(NavLink)`
   transition: all 0.3s ease;
   display: block;
   width: 100%;
-  height: 100%;
 
   &:hover {
     text-shadow: 
@@ -90,7 +88,6 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 `;
-
 
 const NavMenu = ({ open, isMobile, navItems, onNavigate }) => (
   <NavLinks open={open}>
