@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { NavLink } from 'react-router';
 
 const MainLayout = styled.div`
   display: flex;
@@ -51,16 +52,20 @@ function Home() {
         </Intro>
         <CardContainer>
           <Card>
-            text
+            <NavLink to={'./page1'}>page 1</NavLink>
+            <div>text</div>
           </Card>
           <Card>
-            some longer text here
+            <NavLink to={'./page2'}>page 2</NavLink>
+            <div>some longer text here</div>
           </Card>
           <Card>
-            some text here
+            <NavLink to={'./page3'}>page 3</NavLink>
+            <div>some text here</div>
           </Card>
           <Card>
-            some really really long text that will wrap to a new line here
+            <NavLink to={'./page4'}>page 4</NavLink>
+            <div>ome really really long text that will wrap to a new line here</div>
           </Card>
         </CardContainer>
       </MainLayout>
