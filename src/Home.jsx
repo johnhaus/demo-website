@@ -4,43 +4,43 @@ import viteLogo from '/vite.svg';
 import styled, { keyframes } from 'styled-components';
 import Header from './shared/navbar/header';
 
-const GreenText = styled.p`
-  color: green;
-`;
-
-const GreyText = styled.p`
-  color: #888;
-`;
-
-const LogoImage = styled.img`
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-  &:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+const MainLayout = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 40px;
+  @media (max-width: 430px) {
+    margin: 0 8px;
   }
+`;
+
+const Intro = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  height: 200px;
+  font-size: 24px;
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 900px;
+  gap: 16px;
+  margin-bottom: 16px;
 `;
 
 const Card = styled.div`
-  padding: 2em;
-`;
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const Rotate = styled(LogoImage)`
-  animation: ${rotate} 20s linear infinite;
-  &:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
+  width: 300px;
+  height: 300px;
+  border: 5px solid #8b0000;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.87);
+  color: #242424;
 `;
 
 function Home() {
@@ -49,22 +49,25 @@ function Home() {
   return (
     <>
       <Header />
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-          <LogoImage src={viteLogo} alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-          <Rotate src={reactLogo} alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <Card>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <GreenText>Home Page</GreenText>
-      </Card>
-      <GreyText>Click on the Vite and React logos to learn more</GreyText>
+      <MainLayout>
+        <Intro>
+          <h1>Intro text</h1>
+        </Intro>
+        <CardContainer>
+          <Card>
+            text
+          </Card>
+          <Card>
+            some longer text here
+          </Card>
+          <Card>
+            some text here
+          </Card>
+          <Card>
+            some really really long text that will wrap to a new line here
+          </Card>
+        </CardContainer>
+      </MainLayout>
     </>
   );
 }
