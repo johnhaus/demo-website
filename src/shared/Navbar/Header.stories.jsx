@@ -10,5 +10,4 @@ export default {
   },
 };
 
-export const Default = {
-};
+export const Default = {};
