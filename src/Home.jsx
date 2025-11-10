@@ -32,8 +32,6 @@ const CardContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-
-
 function Home() {
   return (
     <>
