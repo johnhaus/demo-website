@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { NavLink } from 'react-router';
+import Card from './components/Card';
 
 const MainLayout = styled.div`
   display: flex;
@@ -32,15 +33,6 @@ const CardContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-const Card = styled.div`
-  width: 300px;
-  height: 300px;
-  border: 5px solid #8b0000;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.87);
-  color: #242424;
-`;
-
 function Home() {
   const [count, setCount] = useState(0);
 
@@ -51,21 +43,17 @@ function Home() {
           <h1>Intro text</h1>
         </Intro>
         <CardContainer>
-          <Card>
-            <NavLink to={'./page1'}>page 1</NavLink>
-            <div>text</div>
+          <Card to={'./page1'} title={'title'}>
+            text
           </Card>
-          <Card>
-            <NavLink to={'./page2'}>page 2</NavLink>
-            <div>some longer text here</div>
+          <Card to={'./page2'} title={'title'}>
+            some longer text here
           </Card>
-          <Card>
-            <NavLink to={'./page3'}>page 3</NavLink>
-            <div>some text here</div>
+          <Card to={'./page3'} title={'title'}>
+            some text here
           </Card>
-          <Card>
-            <NavLink to={'./page4'}>page 4</NavLink>
-            <div>ome really really long text that will wrap to a new line here</div>
+          <Card to={'./page4'} title={'title'}>
+            some really really long text that will wrap to a new line here
           </Card>
         </CardContainer>
       </MainLayout>
