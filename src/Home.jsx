@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { NavLink } from 'react-router';
 import Card from './components/Card';
 
@@ -34,8 +33,6 @@ const CardContainer = styled.div`
 `;
 
 function Home() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <MainLayout>
