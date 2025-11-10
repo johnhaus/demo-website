@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function About() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   const [thing, setThing] = useState(0)
 
   return (
@@ -17,6 +17,8 @@ function About() {
     </>
   );
 }
+
+
 
 
 export default About;
