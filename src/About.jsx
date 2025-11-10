@@ -3,8 +3,6 @@ import { useState } from 'react';
 function About() {
   const [count, setCount] = useState(0);
 
-  const [thing, setThing] = useState(0)
-
   return (
     <>
       <h1>About Page</h1>
@@ -18,8 +16,5 @@ function About() {
     </>
   );
 }
-
-
-
 
 export default About;
