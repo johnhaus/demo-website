@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { NavLink } from 'react-router';
 
 const StyledCard = styled(NavLink)`
@@ -31,7 +31,7 @@ const Card = ({ to, title, children }) => {
       <Header>{title}</Header>
       <TextArea>{children}</TextArea>
     </StyledCard>
-  )
+  );
 };
 
 export default Card;

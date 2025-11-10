@@ -7,7 +7,7 @@ import Page1 from './pages/Page1.jsx';
 import Page2 from './pages/Page2.jsx';
 import Page3 from './pages/Page3.jsx';
 import Page4 from './pages/Page4.jsx';
-import Layout from './Layout'; 
+import Layout from './Layout';
 import { createGlobalStyle } from 'styled-components';
 
 const root = document.getElementById('root');
