@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { FaTrashAlt, FaCheck, FaExclamation } from 'react-icons/fa';
 
 const Container = styled.div`
   display: flex;
@@ -43,12 +44,15 @@ const TaskItem = styled.li`
 `;
 
 const TaskButton = styled.button`
-  background-color: ${(props) => (props.priority ? '#ff6347' : '#4caf50')};
+  background-color: ${(props) => props.bgColor || '#f0f0f0'};
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
+  margin-left: 5px;
+  font-size: 16px;
 
   &:hover {
     opacity: 0.8;
@@ -126,6 +130,11 @@ const TodoList = () => {
     setTasks(newTasks);
   };
 
+  const deleteTask = (index) => {
+    const newTasks = tasks.filter((task, i) => i !== index);
+    setTasks(newTasks);
+  };
+
   return (
     <Container>
       <TodoWrapper>
@@ -162,13 +171,19 @@ const TodoList = () => {
                   <span>{task.text}</span>
                   <div>
                     <TaskButton
-                      priority={true}
+                      bgColor="#ff6347"
                       onClick={() => togglePriority(index)}
                     >
-                      Remove Priority
+                      <FaExclamation />
                     </TaskButton>
-                    <TaskButton onClick={() => toggleCompletion(index)}>
-                      {task.completed ? 'Undo' : 'Complete'}
+                    <TaskButton
+                      bgColor="#4caf50"
+                      onClick={() => toggleCompletion(index)}
+                    >
+                      <FaCheck />
+                    </TaskButton>
+                    <TaskButton bgColor="#f44336" onClick={() => deleteTask(index)}>
+                      <FaTrashAlt />
                     </TaskButton>
                   </div>
                 </TaskItem>
@@ -186,13 +201,19 @@ const TodoList = () => {
                   <span>{task.text}</span>
                   <div>
                     <TaskButton
-                      priority={false}
+                      bgColor="#ff6347"
                       onClick={() => togglePriority(index)}
                     >
-                      Mark as Priority
+                      <FaExclamation />
                     </TaskButton>
-                    <TaskButton onClick={() => toggleCompletion(index)}>
-                      {task.completed ? 'Undo' : 'Complete'}
+                    <TaskButton
+                      bgColor="#4caf50"
+                      onClick={() => toggleCompletion(index)}
+                    >
+                      <FaCheck />
+                    </TaskButton>
+                    <TaskButton bgColor="#f44336" onClick={() => deleteTask(index)}>
+                      <FaTrashAlt />
                     </TaskButton>
                   </div>
                 </TaskItem>
@@ -209,8 +230,11 @@ const TodoList = () => {
                 <TaskItem key={index} completed={task.completed}>
                   <span>{task.text}</span>
                   <div>
-                    <TaskButton onClick={() => toggleCompletion(index)}>
-                      Undo
+                    <TaskButton
+                      bgColor="#4caf50"
+                      onClick={() => toggleCompletion(index)}
+                    >
+                      <FaCheck />
                     </TaskButton>
                   </div>
                 </TaskItem>
