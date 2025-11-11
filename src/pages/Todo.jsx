@@ -40,7 +40,8 @@ const TaskItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: ${(props) => (props.$completed ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)')};
+  box-shadow: ${(props) =>
+    props.$completed ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
 `;
 
 const TaskButton = styled.button`
@@ -120,7 +121,7 @@ const TodoList = () => {
     if (taskText.trim() !== '') {
       setTasks([
         ...tasks,
-        { key: key, text: taskText, completed: false, priority: isPriority }
+        { key: key, text: taskText, completed: false, priority: isPriority },
       ]);
       setTaskText('');
       setIsPriority(false);
@@ -173,7 +174,8 @@ const TodoList = () => {
           <AddTaskButton onClick={addTask}>Add Task</AddTaskButton>
         </InputWrapper>
 
-        {tasks.filter((task) => task.priority && !task.completed).length > 0 && (
+        {tasks.filter((task) => task.priority && !task.completed).length >
+          0 && (
           <Section>
             <SectionTitle>Priority Tasks</SectionTitle>
             <TaskList>
@@ -266,7 +268,6 @@ const TodoList = () => {
                       >
                         <FaTrashAlt />
                       </TaskButton>
-
                     </div>
                   </TaskItem>
                 ))}
