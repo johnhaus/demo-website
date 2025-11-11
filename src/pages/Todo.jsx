@@ -57,6 +57,14 @@ const TaskButton = styled.button`
   &:hover {
     opacity: 0.8;
   }
+
+  ${(props) =>
+    props.isPriority &&
+    `
+      background-color: ${props.priority ? '#ff6347' : 'white'};
+      color: ${props.priority ? 'white' : '#ff6347'};
+      border: ${props.priority ? 'none' : '2px solid #ff6347'};
+  `}
 `;
 
 const AddTaskButton = styled.button`
@@ -171,7 +179,8 @@ const TodoList = () => {
                   <span>{task.text}</span>
                   <div>
                     <TaskButton
-                      bgColor="#ff6347"
+                      priority={task.priority}
+                      isPriority={true}
                       onClick={() => togglePriority(index)}
                     >
                       <FaExclamation />
@@ -201,7 +210,8 @@ const TodoList = () => {
                   <span>{task.text}</span>
                   <div>
                     <TaskButton
-                      bgColor="#ff6347"
+                      priority={task.priority}
+                      isPriority={true}
                       onClick={() => togglePriority(index)}
                     >
                       <FaExclamation />
