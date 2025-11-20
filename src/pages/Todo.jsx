@@ -107,8 +107,40 @@ const CheckboxWrapper = styled.div`
   align-items: center;
 `;
 
+const CheckboxInput = styled.input`
+  display: none;
+
+  &:checked + label .checkmark {
+    background-color: #8b0000;
+    border-color: #8b0000;
+  }
+
+  &:checked + label .checkmark::after {
+    content: '\\2713';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 16px;
+  }
+`;
+
 const CheckboxLabel = styled.label`
-  margin-left: 10px;
+  position: relative;
+  cursor: pointer;
+  padding-left: 30px; /* Space for the custom checkbox */
+
+  .checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+  }
 `;
 
 const TodoList = () => {
@@ -160,17 +192,20 @@ const TodoList = () => {
             onChange={(e) => setTaskText(e.target.value)}
             placeholder="Enter task..."
           />
+
           <CheckboxWrapper>
-            <input
+            <CheckboxInput
               type="checkbox"
               id="priorityCheckbox"
               checked={isPriority}
               onChange={() => setIsPriority(!isPriority)}
             />
             <CheckboxLabel htmlFor="priorityCheckbox">
+              <span className="checkmark"></span>
               Mark this task as priority
             </CheckboxLabel>
           </CheckboxWrapper>
+
           <AddTaskButton onClick={addTask}>Add Task</AddTaskButton>
         </InputWrapper>
 
