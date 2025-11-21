@@ -16,7 +16,7 @@ const StyledButton = styled.button`
     opacity: 0.8;
   }
 
-   ${({ $isPriority, $priority, theme }) =>
+  ${({ $isPriority, $priority, theme }) =>
     $isPriority &&
     `
       background-color: ${$priority ? theme.colors.orange : theme.colors.white};
