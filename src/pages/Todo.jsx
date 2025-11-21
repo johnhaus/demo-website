@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RoundButton from '../shared/Button/RoundButton'; 
+import RoundButton from '../shared/Button/RoundButton';
+import Button from '../shared/Button/Button';
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
 
 const Container = styled.div`
@@ -43,21 +44,6 @@ const TaskItem = styled.li`
   align-items: center;
   box-shadow: ${(props) =>
     props.$completed ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
-`;
-
-const AddTaskButton = styled.button`
-  background-color: #8b0000;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 15px;
-  width: 100%;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 const InputWrapper = styled.div`
@@ -183,7 +169,7 @@ const TodoList = () => {
             </CheckboxLabel>
           </CheckboxWrapper>
 
-          <AddTaskButton onClick={addTask}>Add Task</AddTaskButton>
+          <Button onClick={addTask}>Add Task</Button>
         </InputWrapper>
 
         {tasks.filter((task) => task.priority && !task.completed).length >
