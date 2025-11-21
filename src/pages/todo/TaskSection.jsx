@@ -23,7 +23,11 @@ const TaskSection = ({ title, tasks, renderButtons }) => {
       <SectionTitle>{title}</SectionTitle>
       <TaskList>
         {tasks.map((task) => (
-          <TaskItemRow key={task.key} task={task} renderButtons={renderButtons} />
+          <TaskItemRow
+            key={task.key}
+            task={task}
+            renderButtons={renderButtons}
+          />
         ))}
       </TaskList>
     </Section>

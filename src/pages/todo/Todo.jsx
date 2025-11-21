@@ -104,24 +104,30 @@ const TodoList = () => {
   };
 
   const toggleCompletion = (taskId) => {
-    setTasks(tasks.map(task =>
-      task.key === taskId ? { ...task, completed: !task.completed } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.key === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
- const togglePriority = (taskId) => {
-    setTasks(tasks.map(task =>
-      task.key === taskId ? { ...task, priority: !task.priority } : task
-    ));
+  const togglePriority = (taskId) => {
+    setTasks(
+      tasks.map((task) =>
+        task.key === taskId ? { ...task, priority: !task.priority } : task
+      )
+    );
   };
 
   const deleteTask = (taskId) => {
-    setTasks(tasks.filter(task => task.key !== taskId));
+    setTasks(tasks.filter((task) => task.key !== taskId));
   };
 
-  const priorityTasks = tasks.filter(task => task.priority && !task.completed);
-  const normalTasks = tasks.filter(task => !task.priority && !task.completed);
-  const completedTasks = tasks.filter(task => task.completed);
+  const priorityTasks = tasks.filter(
+    (task) => task.priority && !task.completed
+  );
+  const normalTasks = tasks.filter((task) => !task.priority && !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed);
 
   return (
     <Container>
