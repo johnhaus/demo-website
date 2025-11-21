@@ -12,7 +12,6 @@ const HamburgerWrapper = styled.div`
     margin-bottom: 4px;
     border-radius: 2px;
   }
-  
 
   @media (max-width: 768px) {
     display: flex;
