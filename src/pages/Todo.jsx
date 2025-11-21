@@ -35,7 +35,7 @@ const TaskList = styled.ul`
 `;
 
 const TaskItem = styled.li`
-  background-color: ${(props) => (props.$completed ? '#d3f9d8' : '#f9f9f9')};
+  background-color: ${(props) => (props.$completed ? props.theme.colors.lightGreen : props.theme.colors.white)};
   padding: 10px;
   margin: 8px 0;
   border-radius: 5px;

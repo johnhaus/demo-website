@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: ${(props) => props.$bgColor || '#f0f0f0'};
-  color: white;
+  background-color: ${({ $bgColor, theme }) => $bgColor || theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   width: 40px;
   height: 40px;
@@ -16,13 +16,13 @@ const StyledButton = styled.button`
     opacity: 0.8;
   }
 
-  ${(props) =>
-    props.$isPriority &&
+   ${({ $isPriority, $priority, theme }) =>
+    $isPriority &&
     `
-      background-color: ${props.$priority ? '#d35400' : 'white'};
-      color: ${props.$priority ? 'white' : '#d35400'};
-      border: ${props.$priority ? 'none' : '2px solid #d35400'};
-  `}
+      background-color: ${$priority ? theme.colors.orange : theme.colors.white};
+      color: ${$priority ? theme.colors.white : theme.colors.orange};
+      border: ${$priority ? 'none' : `2px solid ${theme.colors.orange}`};
+    `}
 `;
 
 const RoundButton = ({ icon, $bgColor, $isPriority, $priority, onClick }) => {
