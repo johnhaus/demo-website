@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import RoundButton from '../shared/Button/RoundButton'; 
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
 
 const Container = styled.div`
@@ -42,30 +43,6 @@ const TaskItem = styled.li`
   align-items: center;
   box-shadow: ${(props) =>
     props.$completed ? 'none' : '0 2px 4px rgba(0, 0, 0, 0.1)'};
-`;
-
-const TaskButton = styled.button`
-  background-color: ${(props) => props.$bgColor || '#f0f0f0'};
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-left: 5px;
-  font-size: 16px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  ${(props) =>
-    props.$isPriority &&
-    `
-      background-color: ${props.$priority ? '#d35400' : 'white'};
-      color: ${props.$priority ? 'white' : '#d35400'};
-      border: ${props.$priority ? 'none' : '2px solid #d35400'};
-  `}
 `;
 
 const AddTaskButton = styled.button`
@@ -220,25 +197,22 @@ const TodoList = () => {
                   <TaskItem key={task.key} $completed={task.completed}>
                     <span>{task.text}</span>
                     <div>
-                      <TaskButton
-                        $priority={task.priority}
+                      <RoundButton
+                        icon={<FaExclamation />}
                         $isPriority={true}
+                        $priority={task.priority}
                         onClick={() => togglePriority(task.key)}
-                      >
-                        <FaExclamation />
-                      </TaskButton>
-                      <TaskButton
+                      />
+                      <RoundButton
+                        icon={<FaCheck />}
                         $bgColor="#388e3c"
                         onClick={() => toggleCompletion(task.key)}
-                      >
-                        <FaCheck />
-                      </TaskButton>
-                      <TaskButton
+                      />
+                      <RoundButton
+                        icon={<FaTrashAlt />}
                         $bgColor="#8b0000"
                         onClick={() => deleteTask(task.key)}
-                      >
-                        <FaTrashAlt />
-                      </TaskButton>
+                      />
                     </div>
                   </TaskItem>
                 ))}
@@ -255,25 +229,22 @@ const TodoList = () => {
                 <TaskItem key={task.key} $completed={task.completed}>
                   <span>{task.text}</span>
                   <div>
-                    <TaskButton
+                    <RoundButton
+                      icon={<FaExclamation />}
                       $priority={task.priority}
                       $isPriority={true}
                       onClick={() => togglePriority(task.key)}
-                    >
-                      <FaExclamation />
-                    </TaskButton>
-                    <TaskButton
+                    />
+                    <RoundButton
+                      icon={<FaCheck />}
                       $bgColor="#388e3c"
                       onClick={() => toggleCompletion(task.key)}
-                    >
-                      <FaCheck />
-                    </TaskButton>
-                    <TaskButton
+                    />
+                    <RoundButton
+                      icon={<FaTrashAlt />}
                       $bgColor="#8b0000"
                       onClick={() => deleteTask(task.key)}
-                    >
-                      <FaTrashAlt />
-                    </TaskButton>
+                    />
                   </div>
                 </TaskItem>
               ))}
@@ -290,19 +261,16 @@ const TodoList = () => {
                   <TaskItem key={task.key} $completed={task.completed}>
                     <span>{task.text}</span>
                     <div>
-                      <TaskButton
+                      <RoundButton
+                        icon={<FaUndo />}
                         $bgColor="#388e3c"
                         onClick={() => toggleCompletion(task.key)}
-                      >
-                        <FaUndo />
-                      </TaskButton>
-
-                      <TaskButton
+                      />
+                      <RoundButton
+                        icon={<FaTrashAlt />}
                         $bgColor="#8b0000"
                         onClick={() => deleteTask(task.key)}
-                      >
-                        <FaTrashAlt />
-                      </TaskButton>
+                      />
                     </div>
                   </TaskItem>
                 ))}
