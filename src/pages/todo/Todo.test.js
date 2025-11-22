@@ -1,4 +1,4 @@
-import { deleteTaskLogic } from './Todo';
+import { deleteTaskLogic } from './taskUtils';
 describe('deleteTaskLogic', () => {
   it('removes the task with the given ID', () => {
     const tasks = [

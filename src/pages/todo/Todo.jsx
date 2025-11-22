@@ -4,6 +4,7 @@ import RoundButton from '../../shared/Button/RoundButton';
 import Button from '../../shared/Button/Button';
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
 import TaskSection from './TaskSection';
+import { deleteTaskLogic } from './taskUtils';
 
 const Container = styled.div`
   display: flex;
@@ -84,10 +85,6 @@ const CheckboxLabel = styled.label`
     background-color: ${({ theme }) => theme.colors.white};
   }
 `;
-
-export const deleteTaskLogic = (tasks, taskId) => {
-  return tasks.filter((task) => task.key !== taskId);
-};
 
 const TodoList = () => {
   const [key, setKey] = useState(1);
