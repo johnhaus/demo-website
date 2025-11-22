@@ -1,6 +1,5 @@
 import { deleteTaskLogic } from './Todo';
 describe('deleteTaskLogic', () => {
-  
   it('removes the task with the given ID', () => {
     const tasks = [
       { key: 1, text: 'Task 1', completed: false, priority: false },
