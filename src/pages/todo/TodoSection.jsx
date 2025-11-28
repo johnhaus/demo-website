@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import TaskItemRow from './TaskItemRow';
+import TodoItemRow from './TodoItemRow';
 
 const Section = styled.div`
   margin-bottom: 20px;
@@ -10,28 +10,28 @@ const SectionTitle = styled.h3`
   font-weight: bold;
 `;
 
-const TaskList = styled.ul`
+const TodoList = styled.ul`
   list-style: none;
   padding: 0;
 `;
 
-const TaskSection = ({ title, tasks, renderButtons }) => {
+const TodoSection = ({ title, tasks, renderButtons }) => {
   if (tasks.length === 0) return null;
 
   return (
     <Section>
       <SectionTitle>{title}</SectionTitle>
-      <TaskList>
+      <TodoList>
         {tasks.map((task) => (
-          <TaskItemRow
+          <TodoItemRow
             key={task.key}
             task={task}
             renderButtons={renderButtons}
           />
         ))}
-      </TaskList>
+      </TodoList>
     </Section>
   );
 };
 
-export default TaskSection;
+export default TodoSection;

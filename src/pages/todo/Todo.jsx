@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import RoundButton from '../../shared/Button/RoundButton';
 import Button from '../../shared/Button/Button';
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
-import TaskSection from './TaskSection';
-import { addTaskLogic, togglePriorityLogic, toggleCompletionLogic, deleteTaskLogic } from './taskUtils';
+import TodoSection from './TodoSection';
+import { addTaskLogic, togglePriorityLogic, toggleCompletionLogic, deleteTaskLogic } from './todoUtils';
 
 const Container = styled.div`
   display: flex;
@@ -155,7 +155,7 @@ const addTask = () => {
           <Button onClick={addTask}>Add Task</Button>
         </InputWrapper>
 
-        <TaskSection
+        <TodoSection
           title="Priority Tasks"
           tasks={priorityTasks}
           renderButtons={(task) => (
@@ -180,7 +180,7 @@ const addTask = () => {
           )}
         />
 
-        <TaskSection
+        <TodoSection
           title="Tasks"
           tasks={normalTasks}
           renderButtons={(task) => (
@@ -205,7 +205,7 @@ const addTask = () => {
           )}
         />
 
-        <TaskSection
+        <TodoSection
           title="Completed Tasks"
           tasks={completedTasks}
           renderButtons={(task) => (

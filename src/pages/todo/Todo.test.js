@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { addTaskLogic, togglePriorityLogic, toggleCompletionLogic, deleteTaskLogic } from './taskUtils';
+import { addTaskLogic, togglePriorityLogic, toggleCompletionLogic, deleteTaskLogic } from './todoUtils';
 
 describe('addTaskLogic', () => {
   it('should add a new task when text is not empty', () => {

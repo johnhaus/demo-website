@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TaskItem = styled.li`
+const TodoItem = styled.li`
   background-color: ${(props) =>
     props.$completed
       ? props.theme.colors.lightGreen
@@ -15,11 +15,11 @@ const TaskItem = styled.li`
     props.$completed ? 'none' : props.theme.colors.lightGrey};
 `;
 
-const TaskItemRow = ({ task, renderButtons }) => (
-  <TaskItem key={task.key} $completed={task.completed}>
+const TodoItemRow = ({ task, renderButtons }) => (
+  <TodoItem key={task.key} $completed={task.completed}>
     <span>{task.text}</span>
     <div>{renderButtons(task)}</div>
-  </TaskItem>
+  </TodoItem>
 );
 
-export default TaskItemRow;
+export default TodoItemRow;
