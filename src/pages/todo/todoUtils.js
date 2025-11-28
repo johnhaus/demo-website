@@ -14,17 +14,13 @@ export const addTaskLogic = (tasks, key, text, isPriority) => {
 
 export const togglePriorityLogic = (tasks, taskId) => {
   return tasks.map((task) => {
-    return task.key === taskId
-      ? { ...task, priority: !task.priority }
-      : task;
+    return task.key === taskId ? { ...task, priority: !task.priority } : task;
   });
 };
 
 export const toggleCompletionLogic = (tasks, taskId) => {
   return tasks.map((task) => {
-    return task.key === taskId
-      ? { ...task, completed: !task.completed }
-      : task;
+    return task.key === taskId ? { ...task, completed: !task.completed } : task;
   });
 };
 

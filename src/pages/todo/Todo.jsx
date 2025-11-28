@@ -4,7 +4,12 @@ import RoundButton from '../../shared/Button/RoundButton';
 import Button from '../../shared/Button/Button';
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
 import TodoSection from './TodoSection';
-import { addTaskLogic, togglePriorityLogic, toggleCompletionLogic, deleteTaskLogic } from './todoUtils';
+import {
+  addTaskLogic,
+  togglePriorityLogic,
+  toggleCompletionLogic,
+  deleteTaskLogic,
+} from './todoUtils';
 
 const Container = styled.div`
   display: flex;
@@ -92,15 +97,15 @@ const TodoList = () => {
   const [taskText, setTaskText] = useState('');
   const [isPriority, setIsPriority] = useState(false);
 
-const addTask = () => {
-  setTasks((prevTasks) => {
-    return addTaskLogic(prevTasks, key, taskText, isPriority);
-  });
+  const addTask = () => {
+    setTasks((prevTasks) => {
+      return addTaskLogic(prevTasks, key, taskText, isPriority);
+    });
 
-  setTaskText('');
-  setIsPriority(false);
-  setKey((prevKey) => prevKey + 1);
-};
+    setTaskText('');
+    setIsPriority(false);
+    setKey((prevKey) => prevKey + 1);
+  };
 
   const togglePriority = (taskId) => {
     setTasks((prevTasks) => {
