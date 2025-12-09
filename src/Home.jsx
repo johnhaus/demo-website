@@ -40,9 +40,10 @@ function Home() {
         </Intro>
         <CardContainer>
           <Card to={'./todo'} title={'Todo List'}>
-            A front-end only Todo List built with React. Add, edit, and remove tasks directly in the browser.
+            A front-end only Todo List built with React. Add, edit, and remove
+            tasks directly in the browser.
           </Card>
-          <Card to={'./page2'} title={'In Development'}>
+          <Card to={'./login'} title={'Front End Login'}>
             This feature is currently being built. Check back soon.
           </Card>
           <Card to={'./page3'} title={'In Development'}>
