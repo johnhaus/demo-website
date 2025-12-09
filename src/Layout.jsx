@@ -1,14 +1,26 @@
 import { Outlet } from 'react-router';
 import Header from './shared/navbar/header';
+import styled from 'styled-components';
+
+const LayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const ContentContainer = styled.div`
+  flex-grow: 1;
+  overflow-y: auto;
+`;
 
 const Layout = () => {
   return (
-    <div>
+    <LayoutContainer>
       <Header />
-      <div>
+      <ContentContainer>
         <Outlet />
-      </div>
-    </div>
+      </ContentContainer>
+    </LayoutContainer>
   );
 };
 

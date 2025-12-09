@@ -6,6 +6,7 @@ import NavMenu from './NavMenu';
 
 const HeaderWrapper = styled.header`
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
