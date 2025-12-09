@@ -157,7 +157,7 @@ const TodoList = () => {
             </CheckboxLabel>
           </CheckboxWrapper>
 
-          <Button onClick={addTask}>Add Task</Button>
+          <Button onClick={addTask} text="Add Task"></Button>
         </InputWrapper>
 
         <TodoSection

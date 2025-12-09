@@ -45,7 +45,8 @@ const Input = styled.input`
 `;
 
 function Login() {
-  const [taskText, setTaskText] = useState('');
+  const [userNameText, setUserNameText] = useState('');
+  const [passwordText, setPasswordText] = useState('');
 
   return (
     <Container>
@@ -55,18 +56,19 @@ function Login() {
           <Input
             id="taskInput"
             type="text"
-            value={taskText}
-            onChange={(e) => console.log(e.target.value)}
+            value={userNameText}
+            onChange={(e) => setUserNameText(e.target.value)}
             placeholder="Enter Username..."
           />
           <Label htmlFor="taskInput">Password</Label>
           <Input
             id="taskInput"
             type="text"
-            value={taskText}
-            onChange={(e) => console.log(e.target.value)}
+            value={passwordText}
+            onChange={(e) => setPasswordText(e.target.value)}
             placeholder="Enter Password..."
           />
+          <Button onClick={console.log("go")} text="Enter"></Button>
         </InputWrapper>
       </LoginContainer>
     </Container>
