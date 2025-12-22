@@ -1,12 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../shared/Button/Button';
-import {
-  useLogin,
-  useSession,
-  useCredentials,
-  useSetupMode,
-} from './loginUtils';
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +10,7 @@ const Container = styled.div`
   min-height: 100%;
 `;
 
-const Card = styled.div`
+const LoginContainer = styled.div`
   width: 90%;
   max-width: 600px;
   border-radius: 8px;
@@ -26,12 +20,17 @@ const Card = styled.div`
   margin-bottom: 24px;
 `;
 
-const StatusContainer = styled(Card)`
+const StatusContainer = styled(LoginContainer)`
   height: 40px;
   margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const LoginContainer = styled(Card)``;
+const ErrorContainer = styled.div`
+  color: ${({ theme }) => theme.colors.red};
+`;
 
 const InputWrapper = styled.div`
   padding: 20px;
@@ -58,36 +57,104 @@ const Input = styled.input`
 `;
 
 const Login = () => {
-  const { loggedIn, setLoggedIn } = useSession();
-  const { error, handleLogin } = useLogin();
-  const { setCredentials, removeCredentials } = useCredentials();
-  const { setupMode, setSetupMode } = useSetupMode();
   const [userNameText, setUserNameText] = useState('');
   const [passwordText, setPasswordText] = useState('');
+  const [retypePasswordText, setRetypePasswordText] = useState('');
+  const [changeCredentials, setChangeCredentials] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleLogout = () => {
-    removeCredentials();
-    setLoggedIn(false);
+  const clearFields = () => {
+    setUserNameText('')
+    setPasswordText('')
+    setRetypePasswordText('')
   };
 
-  const resetPassword = () => {
-    removeCredentials();
-    setLoggedIn(false);
-    setSetupMode(true);
+  const clearError = () => {
+    setError('')
+  }
+
+  const accountLogin = () => {
+    const userName = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    if (userName === userNameText && password === passwordText) {
+      setLoggedIn(true)
+      clearFields()
+      clearError()
+    } else {
+      setError('Invalid credentials, please try again');
+    };
   };
 
-  const handleSetCredentials = () => {
-    setCredentials(userNameText, passwordText);
-    setLoggedIn(true);
-    setSetupMode(false);
+  const isValidText = (value) => typeof value === 'string' && /^\S+$/.test(value);
+
+  const updateCredentials = () => {
+    const username = userNameText?.trim();
+    const password = passwordText?.trim();
+    const retype = retypePasswordText?.trim();
+
+    if (!isValidText(username)) {
+      setError("Invalid username");
+      return;
+    }
+
+    if (!isValidText(password)) {
+      setError("Invalid password");
+      return;
+    }
+
+    if (password !== retype) {
+      setError("Passwords do not match");
+      return;
+    }
+    localStorage.setItem('username', userNameText);
+    localStorage.setItem('password', passwordText);
+    clearFields();
+    goBack();
+    accountLogout();
+    clearError();
+    setError('Changes saved, please log in to continue');
+  };
+
+  const goBack = () => {
+    clearError();
+    setChangeCredentials(false)
+    clearFields()
+  };
+
+  const changeAccountCredentials = () => {
+    clearError();
+    const userName = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+
+    (!loggedIn && (userName || password)) ?
+      setError("An account already exists, please login or reset your account")
+    :
+      setChangeCredentials(true)
+  };
+
+  const resetAccount = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    setLoggedIn(false)
+    setError('Your account has been deleted');
+    setChangeCredentials(false);
+    clearFields();
+  };
+
+  const accountLogout = () => {
+    clearError();
+    setLoggedIn(false);
   };
 
   return (
     <Container>
-      <StatusContainer>{loggedIn ? 'Logged in' : 'Logged out'}</StatusContainer>
+      <StatusContainer>{(loggedIn ? 'Logged in' : 'Logged out')}</StatusContainer>
       <LoginContainer>
         <InputWrapper>
-          {!loggedIn && (
+
+          {(!loggedIn || changeCredentials) && (
             <>
               <Label htmlFor="username">Username</Label>
               <Input
@@ -105,42 +172,64 @@ const Login = () => {
                 onChange={(e) => setPasswordText(e.target.value)}
                 placeholder="Enter Password..."
               />
-              {error && <div style={{ color: 'red' }}>{error}</div>}
+              {changeCredentials && (
+                <>
+                  <Label htmlFor="retype password">Retype Password</Label>
+                    <Input
+                      type="password"
+                      id="retypePassword"
+                      value={retypePasswordText}
+                      onChange={(e) => setRetypePasswordText(e.target.value)}
+                      placeholder="Retype Password..."
+                    />
+                  </>
+                )}
+              {error && <ErrorContainer>{error}</ErrorContainer>}
             </>
           )}
 
-          {loggedIn ? (
+          {loggedIn && changeCredentials && (
             <>
-              <Button onClick={handleLogout} text="Logout" />
-              <Button onClick={resetPassword} text="Reset Password" />
-            </>
-          ) : (
-            <>
-              {!setupMode ? (
-                <>
-                  <Button
-                    onClick={() =>
-                      handleLogin(userNameText, passwordText, setLoggedIn)
-                    }
-                    text="Login"
-                  />
-                  <Button
-                    onClick={() => setSetupMode(true)}
-                    text="Create Account"
-                  />
-                  <Button onClick={resetPassword} text="Reset Password" />
-                </>
-              ) : (
-                <>
-                  <Button
-                    onClick={handleSetCredentials}
-                    text="Create Account"
-                  />
-                  <Button onClick={() => setSetupMode(false)} text="Back" />
-                </>
-              )}
+              <Button
+                onClick={() => updateCredentials()}
+                text="Update"
+              />
+              <Button onClick={() => goBack()} text="Back" />
+              <Button onClick={() => resetAccount()} text="Delete Account" />
             </>
           )}
+
+          {(!loggedIn && !changeCredentials) && (
+            <>
+              <Button
+                onClick={() => accountLogin()}
+                text="Login"
+              />
+              <Button
+                onClick={() => changeAccountCredentials()}
+                text="Create An Account"
+              />
+              <Button onClick={() => resetAccount()} text="Reset Account" />
+            </>
+          )}
+
+          {(!loggedIn && changeCredentials) && (
+            <>
+              <Button
+                onClick={() => updateCredentials()}
+                text="Create Account"
+              />
+              <Button onClick={() => goBack()} text="Back" />
+            </>
+          )}
+
+          {(loggedIn && !changeCredentials) &&(
+            <>
+              <Button onClick={() => accountLogout()} text="Logout" />
+              <Button onClick={() => changeAccountCredentials()} text="Update Account" />
+            </>
+          )}
+
         </InputWrapper>
       </LoginContainer>
     </Container>
