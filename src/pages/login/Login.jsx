@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../shared/Button/Button';
 
@@ -65,29 +65,30 @@ const Login = () => {
   const [error, setError] = useState('');
 
   const clearFields = () => {
-    setUserNameText('')
-    setPasswordText('')
-    setRetypePasswordText('')
+    setUserNameText('');
+    setPasswordText('');
+    setRetypePasswordText('');
   };
 
   const clearError = () => {
-    setError('')
-  }
+    setError('');
+  };
 
   const accountLogin = () => {
     const userName = localStorage.getItem('username');
     const password = localStorage.getItem('password');
 
     if (userName === userNameText && password === passwordText) {
-      setLoggedIn(true)
-      clearFields()
-      clearError()
+      setLoggedIn(true);
+      clearFields();
+      clearError();
     } else {
       setError('Invalid credentials, please try again');
-    };
+    }
   };
 
-  const isValidText = (value) => typeof value === 'string' && /^\S+$/.test(value);
+  const isValidText = (value) =>
+    typeof value === 'string' && /^\S+$/.test(value);
 
   const updateCredentials = () => {
     const username = userNameText?.trim();
@@ -95,17 +96,17 @@ const Login = () => {
     const retype = retypePasswordText?.trim();
 
     if (!isValidText(username)) {
-      setError("Invalid username");
+      setError('Invalid username');
       return;
     }
 
     if (!isValidText(password)) {
-      setError("Invalid password");
+      setError('Invalid password');
       return;
     }
 
     if (password !== retype) {
-      setError("Passwords do not match");
+      setError('Passwords do not match');
       return;
     }
     localStorage.setItem('username', userNameText);
@@ -119,8 +120,8 @@ const Login = () => {
 
   const goBack = () => {
     clearError();
-    setChangeCredentials(false)
-    clearFields()
+    setChangeCredentials(false);
+    clearFields();
   };
 
   const changeAccountCredentials = () => {
@@ -128,16 +129,17 @@ const Login = () => {
     const userName = localStorage.getItem('username');
     const password = localStorage.getItem('password');
 
-    (!loggedIn && (userName || password)) ?
-      setError("An account already exists, please login or reset your account")
-    :
-      setChangeCredentials(true)
+    !loggedIn && (userName || password)
+      ? setError(
+          'An account already exists, please login or reset your account'
+        )
+      : setChangeCredentials(true);
   };
 
   const resetAccount = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('password');
-    setLoggedIn(false)
+    setLoggedIn(false);
     setError('Your account has been deleted');
     setChangeCredentials(false);
     clearFields();
@@ -150,10 +152,9 @@ const Login = () => {
 
   return (
     <Container>
-      <StatusContainer>{(loggedIn ? 'Logged in' : 'Logged out')}</StatusContainer>
+      <StatusContainer>{loggedIn ? 'Logged in' : 'Logged out'}</StatusContainer>
       <LoginContainer>
         <InputWrapper>
-
           {(!loggedIn || changeCredentials) && (
             <>
               <Label htmlFor="username">Username</Label>
@@ -175,36 +176,30 @@ const Login = () => {
               {changeCredentials && (
                 <>
                   <Label htmlFor="retype password">Retype Password</Label>
-                    <Input
-                      type="password"
-                      id="retypePassword"
-                      value={retypePasswordText}
-                      onChange={(e) => setRetypePasswordText(e.target.value)}
-                      placeholder="Retype Password..."
-                    />
-                  </>
-                )}
+                  <Input
+                    type="password"
+                    id="retypePassword"
+                    value={retypePasswordText}
+                    onChange={(e) => setRetypePasswordText(e.target.value)}
+                    placeholder="Retype Password..."
+                  />
+                </>
+              )}
               {error && <ErrorContainer>{error}</ErrorContainer>}
             </>
           )}
 
           {loggedIn && changeCredentials && (
             <>
-              <Button
-                onClick={() => updateCredentials()}
-                text="Update"
-              />
+              <Button onClick={() => updateCredentials()} text="Update" />
               <Button onClick={() => goBack()} text="Back" />
               <Button onClick={() => resetAccount()} text="Delete Account" />
             </>
           )}
 
-          {(!loggedIn && !changeCredentials) && (
+          {!loggedIn && !changeCredentials && (
             <>
-              <Button
-                onClick={() => accountLogin()}
-                text="Login"
-              />
+              <Button onClick={() => accountLogin()} text="Login" />
               <Button
                 onClick={() => changeAccountCredentials()}
                 text="Create An Account"
@@ -213,7 +208,7 @@ const Login = () => {
             </>
           )}
 
-          {(!loggedIn && changeCredentials) && (
+          {!loggedIn && changeCredentials && (
             <>
               <Button
                 onClick={() => updateCredentials()}
@@ -223,13 +218,15 @@ const Login = () => {
             </>
           )}
 
-          {(loggedIn && !changeCredentials) &&(
+          {loggedIn && !changeCredentials && (
             <>
               <Button onClick={() => accountLogout()} text="Logout" />
-              <Button onClick={() => changeAccountCredentials()} text="Update Account" />
+              <Button
+                onClick={() => changeAccountCredentials()}
+                text="Update Account"
+              />
             </>
           )}
-
         </InputWrapper>
       </LoginContainer>
     </Container>

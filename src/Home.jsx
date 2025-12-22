@@ -44,7 +44,9 @@ function Home() {
             tasks directly in the browser.
           </Card>
           <Card to={'./login'} title={'Front End Login'}>
-            This feature is currently being built. Check back soon.
+            A front-end login component that utilizes localStorage to hold a
+            username and password. Does not include any back-end logic and is
+            not intended to store sensitive information.
           </Card>
           <Card to={'./page3'} title={'In Development'}>
             This feature is currently being built. Check back soon.
