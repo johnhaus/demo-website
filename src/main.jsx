@@ -8,7 +8,7 @@ import Home from './Home.jsx';
 import About from './About.jsx';
 import Todo from './pages/todo/Todo.jsx';
 import Login from './pages/login/Login.jsx';
-import Page3 from './pages/Page3.jsx';
+import PostsExplorer from './pages/PostsExplorer/PostsExplorer.jsx';
 import Page4 from './pages/Page4.jsx';
 import Layout from './Layout';
 
@@ -25,7 +25,7 @@ ReactDOM.createRoot(root).render(
             <Route path="about" element={<About />} />
             <Route path="todo" element={<Todo />} />
             <Route path="login" element={<Login />} />
-            <Route path="page3" element={<Page3 />} />
+            <Route path="posts-explorer" element={<PostsExplorer />} />
             <Route path="page4" element={<Page4 />} />
           </Route>
         </Routes>

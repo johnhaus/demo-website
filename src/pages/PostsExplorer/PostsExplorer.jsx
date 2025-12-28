@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { cardStyles } from '../styles/cardStyles';
+import { cardStyles } from '../../styles/cardStyles';
 
 const Container = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const Content = styled.div`
   margin: 8px;
 `;
 
-function Page3() {
+function PostsExplorer() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -90,4 +90,4 @@ function Page3() {
   );
 }
 
-export default Page3;
+export default PostsExplorer;

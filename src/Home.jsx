@@ -52,7 +52,7 @@ function Home() {
             username and password. Does not include any back-end logic and is
             not intended to store sensitive information.
           </Card>
-          <Card to={'./page3'} title={'Posts Explorer'}>
+          <Card to={'./posts-explorer'} title={'Posts Explorer'}>
             This feature is currently being built. Check back soon.
             {/*A demo component that fetches and displays user posts with search, filtering, and comments.
             <SmallText>
