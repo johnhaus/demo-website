@@ -85,7 +85,6 @@ function PostsExplorer() {
   const loadMoreRef = useRef(null);
   const observerRef = useRef(null);
 
-
   const fetchPosts = useCallback(async () => {
     if (loading || !hasMore) return;
 
@@ -148,15 +147,14 @@ function PostsExplorer() {
             </ListItem>
           ))}
 
-          <li ref={loadMoreRef} style={{ height: 1, listStyle: 'none', margin: 0, padding: 0 }} />
+          <li
+            ref={loadMoreRef}
+            style={{ height: 1, listStyle: 'none', margin: 0, padding: 0 }}
+          />
 
           {loading && <ListItem>Loading…</ListItem>}
           {error && <ListItem>{error}</ListItem>}
-          {!hasMore && posts.length > 0 && (
-            <ListItem>
-              No more posts
-            </ListItem>
-          )}
+          {!hasMore && posts.length > 0 && <ListItem>No more posts</ListItem>}
         </List>
       </PostContainer>
     </Container>
