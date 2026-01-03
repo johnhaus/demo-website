@@ -37,12 +37,25 @@ const ListItem = styled.li`
   ${cardStyles}
 `;
 
+const LastListItem = styled.div`
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+
+  ${cardStyles}
+`;
+
 const Title = styled.h3`
   margin: 8px;
 `;
 
 const Content = styled.div`
   margin: 8px;
+`;
+
+const ErrorMessage = styled.div`
+  width: 380px;
 `;
 
 const initialState = {
@@ -86,7 +99,7 @@ function PostsExplorer() {
   const observerRef = useRef(null);
 
   const fetchPosts = useCallback(async () => {
-    if (loading || !hasMore) return;
+    if (loading || !hasMore || error) return;
 
     dispatch({ type: actionTypes.SET_LOADING, payload: true });
 
@@ -103,9 +116,13 @@ function PostsExplorer() {
       dispatch({ type: actionTypes.SET_POSTS, payload: response.data });
       dispatch({ type: actionTypes.SET_PAGE, payload: page + 1 });
     } catch (err) {
+      const errorMessage = err.response
+        ? `Error: ${err.response.status} - ${err.response.statusText}`
+        : 'Failed to load. Please check your connection.';
+
       dispatch({
         type: actionTypes.SET_ERROR,
-        payload: 'Failed to fetch data',
+        payload: errorMessage,
       });
     } finally {
       dispatch({ type: actionTypes.SET_LOADING, payload: false });
@@ -152,9 +169,9 @@ function PostsExplorer() {
             style={{ height: 1, listStyle: 'none', margin: 0, padding: 0 }}
           />
 
-          {loading && <ListItem>Loading…</ListItem>}
-          {error && <ListItem>{error}</ListItem>}
-          {!hasMore && posts.length > 0 && <ListItem>No more posts</ListItem>}
+          {loading && <div>Loading…</div>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {!hasMore && posts.length > 0 && <LastListItem>No more posts</LastListItem>}
         </List>
       </PostContainer>
     </Container>
