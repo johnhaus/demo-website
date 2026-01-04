@@ -16,20 +16,20 @@ const root = document.getElementById('root');
 
 ReactDOM.createRoot(root).render(
   // <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="todo" element={<Todo />} />
-            <Route path="login" element={<Login />} />
-            <Route path="posts-explorer" element={<PostsExplorer />} />
-            <Route path="page4" element={<Page4 />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="todo" element={<Todo />} />
+          <Route path="login" element={<Login />} />
+          <Route path="posts-explorer" element={<PostsExplorer />} />
+          <Route path="page4" element={<Page4 />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </ThemeProvider>
   // </StrictMode>
 );

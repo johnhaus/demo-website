@@ -127,12 +127,15 @@ function PostsExplorer() {
     } finally {
       dispatch({ type: actionTypes.SET_LOADING, payload: false });
     }
-  }, [page, loading, hasMore]);
+  }, [page, loading, hasMore, error]);
+
+  const didInitialFetchRef = useRef(false);
 
   useEffect(() => {
+    if (didInitialFetchRef.current) return;
+    didInitialFetchRef.current = true;
     fetchPosts();
-  }, []);
-
+  }, [fetchPosts]);
   useEffect(() => {
     if (!loadMoreRef.current || !hasMore) return;
 
@@ -171,7 +174,9 @@ function PostsExplorer() {
 
           {loading && <div>Loading…</div>}
           {error && <ErrorMessage>{error}</ErrorMessage>}
-          {!hasMore && posts.length > 0 && <LastListItem>No more posts</LastListItem>}
+          {!hasMore && posts.length > 0 && (
+            <LastListItem>No more posts</LastListItem>
+          )}
         </List>
       </PostContainer>
     </Container>
