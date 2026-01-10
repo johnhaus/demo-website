@@ -16,6 +16,28 @@ const MenuBar = styled.div`
   align-items: center;
 `;
 
+const SearchInput = styled.input`
+  width: 300px;
+  padding: 8px;
+  margin: 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const SearchButton = styled.button`
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 const PostContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -64,6 +86,8 @@ const initialState = {
   error: null,
   page: 1,
   hasMore: true,
+  searchInput: '',
+  activeQuery: '',
 };
 
 const actionTypes = {
@@ -72,6 +96,8 @@ const actionTypes = {
   SET_POSTS: 'SET_POSTS',
   SET_PAGE: 'SET_PAGE',
   SET_HAS_MORE: 'SET_HAS_MORE',
+  SET_SEARCH_INPUT: 'SET_SEARCH_INPUT',
+  SET_ACTIVE_QUERY: 'SET_ACTIVE_QUERY',
 };
 
 const reducer = (state, action) => {
@@ -81,11 +107,29 @@ const reducer = (state, action) => {
     case actionTypes.SET_ERROR:
       return { ...state, error: action.payload };
     case actionTypes.SET_POSTS:
-      return { ...state, posts: [...state.posts, ...action.payload] };
+      return {
+        ...state,
+        posts:
+          state.page === 1
+            ? action.payload
+            : [...state.posts, ...action.payload],
+      };
     case actionTypes.SET_PAGE:
       return { ...state, page: action.payload };
     case actionTypes.SET_HAS_MORE:
       return { ...state, hasMore: action.payload };
+    case actionTypes.SET_SEARCH_INPUT:
+      return { ...state, searchInput: action.payload };
+    case actionTypes.SET_ACTIVE_QUERY:
+      return {
+        ...state,
+        activeQuery: action.payload,
+        page: 1,
+        posts: [],
+        hasMore: true,
+        error: null,
+      };
+
     default:
       return state;
   }
@@ -93,7 +137,7 @@ const reducer = (state, action) => {
 
 function PostsExplorer() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { posts, loading, error, page, hasMore } = state;
+  const { posts, loading, error, page, hasMore, searchInput, activeQuery } = state;
 
   const loadMoreRef = useRef(null);
   const observerRef = useRef(null);
@@ -104,8 +148,17 @@ function PostsExplorer() {
     dispatch({ type: actionTypes.SET_LOADING, payload: true });
 
     try {
+      const params = new URLSearchParams({
+        _page: page,
+        _limit: 20,
+      });
+
+      if (activeQuery) {
+        params.append('q', activeQuery);
+      }
+
       const response = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=20`
+        `https://jsonplaceholder.typicode.com/posts?${params.toString()}`
       );
 
       if (response.data.length === 0) {
@@ -116,26 +169,15 @@ function PostsExplorer() {
       dispatch({ type: actionTypes.SET_POSTS, payload: response.data });
       dispatch({ type: actionTypes.SET_PAGE, payload: page + 1 });
     } catch (err) {
-      const errorMessage = err.response
-        ? `Error: ${err.response.status} - ${err.response.statusText}`
-        : 'Failed to load. Please check your connection.';
-
       dispatch({
         type: actionTypes.SET_ERROR,
-        payload: errorMessage,
+        payload: 'Failed to load posts.',
       });
     } finally {
       dispatch({ type: actionTypes.SET_LOADING, payload: false });
     }
-  }, [page, loading, hasMore, error]);
+  }, [page, loading, hasMore, error, activeQuery]);
 
-  const didInitialFetchRef = useRef(false);
-
-  useEffect(() => {
-    if (didInitialFetchRef.current) return;
-    didInitialFetchRef.current = true;
-    fetchPosts();
-  }, [fetchPosts]);
   useEffect(() => {
     if (!loadMoreRef.current || !hasMore) return;
 
@@ -153,9 +195,31 @@ function PostsExplorer() {
     return () => observerRef.current?.disconnect();
   }, [fetchPosts, loading, hasMore]);
 
+  const handleSearchChange = (e) => {
+    dispatch({
+      type: actionTypes.SET_SEARCH_INPUT,
+      payload: e.target.value,
+    });
+  };
+
+  const handleSearchSubmit = () => {
+    dispatch({
+      type: actionTypes.SET_ACTIVE_QUERY,
+      payload: searchInput.trim(),
+    });
+  };
+
   return (
     <Container>
-      <MenuBar>Menu Bar</MenuBar>
+      <MenuBar>
+        <SearchInput
+          type="text"
+          placeholder="Search posts..."
+          value={searchInput}
+          onChange={handleSearchChange}
+        />
+        <SearchButton onClick={handleSearchSubmit}>Search</SearchButton>
+      </MenuBar>
       <h1>Posts Explorer</h1>
 
       <PostContainer>
