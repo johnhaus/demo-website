@@ -11,30 +11,40 @@ const Container = styled.div`
 
 const MenuBar = styled.div`
   display: flex;
-  height: 40px;
+  height: 80px;
+  width: 90%;
+  max-width: 600px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
 `;
 
 const SearchInput = styled.input`
-  width: 300px;
-  padding: 8px;
-  margin: 16px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  flex: 1;
+  min-width: 180px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+  font-size: 16px;
+
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.colors.black};
+  }
 `;
 
-const SearchButton = styled.button`
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
+const Button = styled.button`
+  background-color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.white};
+  flex: 0;
   border: none;
-  border-radius: 4px;
+  padding: 0 8px;
+  border-radius: 5px;
+  width: 100%;
+  height: 44px;
   cursor: pointer;
-  margin-left: 10px;
 
   &:hover {
-    background-color: #0056b3;
+    opacity: 0.8;
   }
 `;
 
@@ -218,7 +228,7 @@ function PostsExplorer() {
           value={searchInput}
           onChange={handleSearchChange}
         />
-        <SearchButton onClick={handleSearchSubmit}>Search</SearchButton>
+        <Button onClick={handleSearchSubmit}>Search</Button>
       </MenuBar>
       <h1>Posts Explorer</h1>
 
