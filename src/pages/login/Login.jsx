@@ -56,6 +56,13 @@ const Input = styled.input`
   }
 `;
 
+const ButtonColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  gap: 12px;
+`;
+
 const Login = () => {
   const [userNameText, setUserNameText] = useState('');
   const [passwordText, setPasswordText] = useState('');
@@ -190,42 +197,45 @@ const Login = () => {
           )}
 
           {loggedIn && changeCredentials && (
-            <>
-              <Button onClick={() => updateCredentials()} text="Update" />
-              <Button onClick={() => goBack()} text="Back" />
-              <Button onClick={() => resetAccount()} text="Delete Account" />
-            </>
+            <ButtonColumn>
+              <Button onClick={() => updateCredentials()} text="Update" size="sm" />
+              <Button onClick={() => goBack()} text="Back" size="sm" />
+              <Button onClick={() => resetAccount()} text="Delete Account" size="sm" />
+            </ButtonColumn>
           )}
 
           {!loggedIn && !changeCredentials && (
-            <>
-              <Button onClick={() => accountLogin()} text="Login" />
+            <ButtonColumn>
+              <Button onClick={() => accountLogin()} text="Login" size="sm" />
               <Button
                 onClick={() => changeAccountCredentials()}
                 text="Create An Account"
+                size="sm" 
               />
-              <Button onClick={() => resetAccount()} text="Reset Account" />
-            </>
+              <Button onClick={() => resetAccount()} text="Reset Account" size="sm" />
+            </ButtonColumn>
           )}
 
           {!loggedIn && changeCredentials && (
-            <>
+            <ButtonColumn>
               <Button
                 onClick={() => updateCredentials()}
                 text="Create Account"
+                size="sm" 
               />
-              <Button onClick={() => goBack()} text="Back" />
-            </>
+              <Button onClick={() => goBack()} text="Back" size="sm" />
+            </ButtonColumn>
           )}
 
           {loggedIn && !changeCredentials && (
-            <>
-              <Button onClick={() => accountLogout()} text="Logout" />
+            <ButtonColumn>
+              <Button onClick={() => accountLogout()} text="Logout" size="sm" />
               <Button
                 onClick={() => changeAccountCredentials()}
                 text="Update Account"
+                size="sm" 
               />
-            </>
+            </ButtonColumn>
           )}
         </InputWrapper>
       </LoginContainer>

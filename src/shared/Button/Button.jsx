@@ -19,10 +19,9 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
 
-  width: ${({ fullWidth, width }) => (fullWidth ? '100%' : width || 'auto')};
-
-  height: ${({ size = 'md' }) => heightMap[size]};
-  padding: ${({ size = 'md' }) => paddingMap[size]};
+  width: ${({ $fullWidth, width }) => ($fullWidth ? '100%' : width || 'auto')};
+  height: ${({ $size = 'md' }) => heightMap[$size]};
+  padding: ${({ $size = 'md' }) => paddingMap[$size]};
 
   display: inline-flex;
   align-items: center;

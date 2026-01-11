@@ -53,6 +53,7 @@ const Input = styled.input`
 const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 const CheckboxInput = styled.input`
@@ -157,7 +158,7 @@ const TodoList = () => {
             </CheckboxLabel>
           </CheckboxWrapper>
 
-          <Button onClick={addTask} text="Add Task"></Button>
+          <Button onClick={addTask} text="Add Task" size='sm'></Button>
         </InputWrapper>
 
         <TodoSection
