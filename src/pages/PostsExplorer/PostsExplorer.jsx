@@ -264,10 +264,10 @@ function PostsExplorer() {
       </PostContainer>
       {error && (
         <ErrorContainer>
-            <ErrorMessage>{error}</ErrorMessage>
-            <ErrorMessage>
-              <Button onClick={handleRetry} disabled={loading} text="Retry" />
-            </ErrorMessage>
+          <ErrorMessage>{error}</ErrorMessage>
+          <ErrorMessage>
+            <Button onClick={handleRetry} disabled={loading} text="Retry" />
+          </ErrorMessage>
         </ErrorContainer>
       )}
     </Container>

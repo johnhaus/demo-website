@@ -19,8 +19,7 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
 
-  width: ${({ fullWidth, width }) =>
-    fullWidth ? '100%' : width || 'auto'};
+  width: ${({ fullWidth, width }) => (fullWidth ? '100%' : width || 'auto')};
 
   height: ${({ size = 'md' }) => heightMap[size]};
   padding: ${({ size = 'md' }) => paddingMap[size]};
@@ -36,13 +35,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({
-  onClick,
-  text,
-  width,
-  fullWidth = false,
-  size = 'md',
-}) => {
+const Button = ({ onClick, text, width, fullWidth = false, size = 'md' }) => {
   return (
     <StyledButton
       onClick={onClick}
