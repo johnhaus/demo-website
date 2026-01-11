@@ -1,14 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const heightMap = {
+  sm: '32px',
+  md: '44px',
+  lg: '52px',
+};
+
+const paddingMap = {
+  sm: '0 12px',
+  md: '0 16px',
+  lg: '0 20px',
+};
+
 const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
   border: none;
-  padding: 10px;
   border-radius: 5px;
-  margin-top: 15px;
-  width: 100%;
+
+  width: ${({ fullWidth, width }) =>
+    fullWidth ? '100%' : width || 'auto'};
+
+  height: ${({ size = 'md' }) => heightMap[size]};
+  padding: ${({ size = 'md' }) => paddingMap[size]};
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
 
   &:hover {
@@ -16,8 +36,23 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ onClick, text }) => {
-  return <StyledButton onClick={onClick}>{text}</StyledButton>;
+const Button = ({
+  onClick,
+  text,
+  width,
+  fullWidth = false,
+  size = 'md',
+}) => {
+  return (
+    <StyledButton
+      onClick={onClick}
+      fullWidth={fullWidth}
+      width={width}
+      size={size}
+    >
+      {text}
+    </StyledButton>
+  );
 };
 
 export default Button;
