@@ -226,8 +226,13 @@ function PostsExplorer() {
   };
 
   const handleClearSearch = () => {
-    dispatch({ type: actionTypes.SET_SEARCH_INPUT, payload: '' });
-    dispatch({ type: actionTypes.SET_ACTIVE_QUERY, payload: '' });
+    if (searchInput) {
+      dispatch({ type: actionTypes.SET_SEARCH_INPUT, payload: '' });
+    }
+
+    if (activeQuery) {
+      dispatch({ type: actionTypes.SET_ACTIVE_QUERY, payload: '' });
+    }
   };
 
   const handleRetry = () => {

@@ -32,12 +32,18 @@ const StyledButton = styled.button`
   &:hover {
     opacity: 0.8;
   }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
 `;
 
-const Button = ({ onClick, text, width, fullWidth = false, size = 'md' }) => {
+const Button = ({ onClick, text, width, fullWidth = false, size = 'md', disabled = false }) => {
   return (
     <StyledButton
       onClick={onClick}
+      disabled={disabled}
       $fullWidth={fullWidth}
       width={width}
       $size={size}
