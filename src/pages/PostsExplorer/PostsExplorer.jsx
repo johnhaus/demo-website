@@ -242,10 +242,13 @@ function PostsExplorer() {
 
   return (
     <Container>
-      <SearchBar as="form" onSubmit={(e) => {
-        e.preventDefault();
-        handleSearchSubmit();
-      }}>
+      <SearchBar
+        as="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearchSubmit();
+        }}
+      >
         <SearchInput
           type="text"
           placeholder="Search posts..."
