@@ -151,7 +151,6 @@ function PostsExplorer() {
     state;
 
   const loadMoreRef = useRef(null);
-  const observerRef = useRef(null);
 
   const fetchPosts = useCallback(async () => {
     if (loading || !hasMore || error) return;
