@@ -192,20 +192,21 @@ function PostsExplorer() {
   }, [page, loading, hasMore, error, activeQuery]);
 
   useEffect(() => {
-    if (!loadMoreRef.current || !hasMore) return;
+    const node = loadMoreRef.current;
+    if (!node || !hasMore) return;
 
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !loading) {
           fetchPosts();
         }
       },
-      { root: null, rootMargin: '100px', threshold: 0 }
+      { rootMargin: '100px' }
     );
 
-    observerRef.current.observe(loadMoreRef.current);
+    observer.observe(node);
 
-    return () => observerRef.current?.disconnect();
+    return () => observer.disconnect();
   }, [fetchPosts, loading, hasMore]);
 
   const handleSearchChange = (e) => {
@@ -240,22 +241,22 @@ function PostsExplorer() {
     fetchPosts();
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') handleSearchSubmit();
-  };
-
   return (
     <Container>
-      <SearchBar>
+      <SearchBar as="form" onSubmit={(e) => {
+        e.preventDefault();
+        handleSearchSubmit();
+      }}>
         <SearchInput
           type="text"
           placeholder="Search posts..."
           value={searchInput}
           onChange={handleSearchChange}
-          onKeyDown={handleKeyDown}
+          aria-label="Search posts"
         />
-        <Button onClick={handleSearchSubmit} text="Search" />
+        <Button type="submit" text="Search" />
         <Button
+          type="button"
           onClick={handleClearSearch}
           disabled={!searchInput && !activeQuery}
           text="Clear"
