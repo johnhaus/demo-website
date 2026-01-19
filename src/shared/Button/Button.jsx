@@ -17,6 +17,7 @@ export const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.alwaysWhite};
   border: none;
+  box-sizing: border-box;
   border-radius: 5px;
 
   width: ${({ $fullWidth, width }) => ($fullWidth ? '100%' : width || 'auto')};

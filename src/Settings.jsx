@@ -9,6 +9,7 @@ export default function Settings() {
       name="theme"
       value={theme}
       onChange={setTheme}
+      fullWidth={false}
       options={[
         { value: 'light', label: 'Light' },
         { value: 'dark', label: 'Dark' },

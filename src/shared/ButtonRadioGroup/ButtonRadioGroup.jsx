@@ -6,9 +6,16 @@ const Group = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: flex-start;
 `;
 
-export default function ButtonRadioGroup({ name, value, onChange, options }) {
+export default function ButtonRadioGroup({
+  name,
+  value,
+  onChange,
+  options,
+  fullWidth,
+}) {
   return (
     <Group role="radiogroup">
       {options.map((option) => (
@@ -18,6 +25,7 @@ export default function ButtonRadioGroup({ name, value, onChange, options }) {
           value={option.value}
           checked={value === option.value}
           onChange={onChange}
+          fullWidth={fullWidth}
         >
           {option.label}
         </RadioButton>
