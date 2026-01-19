@@ -8,7 +8,7 @@ const HamburgerWrapper = styled.div`
   span {
     height: 3px;
     width: 25px;
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.alwaysWhite};
     margin-bottom: 4px;
     border-radius: 2px;
   }

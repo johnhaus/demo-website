@@ -18,15 +18,15 @@ const HeaderWrapper = styled.header`
 const HomeNavLink = styled(NavLink)`
   text-decoration: none;
   font-size: 18px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.alwaysWhite};
   transition: all 0.3s ease;
   display: block;
   width: 100%;
 
   &:hover {
     text-shadow:
-      0 0 20px ${({ theme }) => theme.colors.hoverWhite};,
-      0 0 25px ${({ theme }) => theme.colors.hoverWhite};,
+      0 0 20px ${({ theme }) => theme.colors.alwaysWhiteHover};,
+      0 0 25px ${({ theme }) => theme.colors.alwaysWhiteHover};,
   }
 `;
 

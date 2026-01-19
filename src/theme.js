@@ -1,7 +1,11 @@
 export const darkTheme = {
   colors: {
     black: '#242424',
+    alwaysBlack: '#242424',
     white: 'rgba(255, 255, 255, 0.87)',
+    alwaysWhite: 'rgba(255, 255, 255, 0.87)',
+    alwaysWhiteHover: 'rgba(255, 255, 255, 0.91)',
+    alwaysWhiteHoverTransparent: 'rgba(255, 255, 255, 0.1)',
     hoverWhite: 'rgba(255, 255, 255, 0.91)',
     hoverTransparent: 'rgba(255, 255, 255, 0.1)',
     activeTransparent: 'rgba(255, 255, 255, 0.2)',
@@ -16,7 +20,11 @@ export const darkTheme = {
 export const lightTheme = {
   colors: {
     black: 'rgba(255, 255, 255, 0.87)',
+    alwaysBlack: '#242424',
     white: '#242424',
+    alwaysWhite: 'rgba(255, 255, 255, 0.87)',
+    alwaysWhiteHover: 'rgba(255, 255, 255, 0.91)',
+    alwaysWhiteHoverTransparent: 'rgba(255, 255, 255, 0.1)',
     hoverWhite: 'rgba(0, 0, 0, 0.91)',
     hoverTransparent: 'rgba(0, 0, 0, 0.1)',
     activeTransparent: 'rgba(0, 0, 0, 0.2)',

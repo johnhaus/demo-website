@@ -15,7 +15,7 @@ const paddingMap = {
 
 export const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.red};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.alwaysWhite};
   border: none;
   border-radius: 5px;
 
