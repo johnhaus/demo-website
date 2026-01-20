@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const TodoItem = styled.li`
   color: ${(props) =>
     props.$completed
-      ? props.theme.colors.alwaysBlack
-      : props.theme.colors.black};
+      ? props.theme.colors.textOnLight
+      : props.theme.colors.textPrimary};
   background-color: ${(props) =>
     props.$completed
       ? props.theme.colors.lightGreen

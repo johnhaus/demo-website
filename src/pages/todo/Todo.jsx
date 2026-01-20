@@ -19,7 +19,7 @@ const Container = styled.div`
 
 const TodoWrapper = styled.div`
   background: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.textPrimary};
   padding: 20px;
   border-radius: 8px;
   width: 90%;

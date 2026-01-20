@@ -1,5 +1,16 @@
+import palette from './palette';
+
+const fixedColors = {
+  textOnLight: palette.black,
+  textOnDark: palette.white,
+};
+
 export const darkTheme = {
   colors: {
+    ...fixedColors,
+
+    textPrimary: palette.black,
+    textSecondary: palette.white,
     black: '#242424',
     alwaysBlack: '#242424',
     white: 'rgba(255, 255, 255, 0.87)',
@@ -20,6 +31,10 @@ export const darkTheme = {
 
 export const lightTheme = {
   colors: {
+    ...fixedColors,
+
+    textPrimary: palette.white,
+    textSecondary: palette.black,
     black: 'rgba(255, 255, 255, 0.87)',
     alwaysBlack: '#242424',
     white: '#242424',
