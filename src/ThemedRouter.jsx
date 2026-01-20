@@ -11,7 +11,7 @@ import PostsExplorer from './pages/PostsExplorer/PostsExplorer';
 import Page4 from './pages/Page4';
 import { PreferencesProvider } from './preferences/PreferencesProvider';
 import { usePreferences } from './preferences/usePreferences';
-import { useResolvedTheme } from './themes/useResolvedTheme';
+import { useResolvedTheme } from './theme/useResolvedTheme';
 
 export default function ThemedRouter() {
   const { theme } = usePreferences();
