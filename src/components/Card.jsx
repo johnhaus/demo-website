@@ -7,7 +7,7 @@ const StyledCard = styled(NavLink)`
   height: 300px;
   &:hover {
     transform: scale(1.05);
-    background-color: ${({ theme }) => theme.colors.hoverWhite};
+    background-color: ${({ theme }) => theme.colors.action.hover};
   }
 
   ${cardStyles}

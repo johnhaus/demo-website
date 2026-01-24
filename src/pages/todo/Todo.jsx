@@ -18,13 +18,13 @@ const Container = styled.div`
 `;
 
 const TodoWrapper = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  background: ${({ theme }) => theme.colors.background.surface};
+  color: ${({ theme }) => theme.colors.text.onSurface};
   padding: 20px;
   border-radius: 8px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 0px 8px ${({ theme }) => theme.colors.lightGrey};
+  box-shadow: 0 0px 8px ${({ theme }) => theme.colors.focus.ring};
 `;
 
 const InputWrapper = styled.div`
@@ -42,11 +42,11 @@ const Input = styled.input`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+  border: 1px solid ${({ theme }) => theme.colors.border.subtle};
   font-size: 16px;
 
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.colors.black};
+    outline: 1px solid ${({ theme }) => theme.colors.focus.ring};
   }
 `;
 
@@ -60,8 +60,8 @@ const CheckboxInput = styled.input`
   display: none;
 
   &:checked + label .checkmark {
-    background-color: ${({ theme }) => theme.colors.red};
-    border-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.accent.primary};
+    border-color: ${({ theme }) => theme.colors.border.strong};
   }
 
   &:checked + label .checkmark::after {
@@ -70,7 +70,7 @@ const CheckboxInput = styled.input`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: ${({ theme }) => theme.colors.alwaysWhite};
+    color: ${({ theme }) => theme.colors.text.fixed};
     font-size: 16px;
   }
 `;
@@ -86,9 +86,9 @@ const CheckboxLabel = styled.label`
     top: 0;
     width: 20px;
     height: 20px;
-    border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+    border: 1px solid ${({ theme }) => theme.colors.border.subtle};
     border-radius: 4px;
-    background-color: ${({ theme }) => theme.colors.alwaysWhite};
+    background-color: ${({ theme }) => theme.colors.control.background};
   }
 `;
 
@@ -174,12 +174,12 @@ const TodoList = () => {
               />
               <RoundButton
                 icon={<FaCheck />}
-                $bgColor={({ theme }) => theme.colors.green}
+                $bgColor={({ theme }) => theme.colors.status.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton
                 icon={<FaTrashAlt />}
-                $bgColor={({ theme }) => theme.colors.red}
+                $bgColor={({ theme }) => theme.colors.accent.primary}
                 onClick={() => deleteTask(task.key)}
               />
             </>
@@ -199,12 +199,12 @@ const TodoList = () => {
               />
               <RoundButton
                 icon={<FaCheck />}
-                $bgColor={({ theme }) => theme.colors.green}
+                $bgColor={({ theme }) => theme.colors.status.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton
                 icon={<FaTrashAlt />}
-                $bgColor={({ theme }) => theme.colors.red}
+                $bgColor={({ theme }) => theme.colors.accent.primary}
                 onClick={() => deleteTask(task.key)}
               />
             </>
@@ -218,12 +218,12 @@ const TodoList = () => {
             <>
               <RoundButton
                 icon={<FaUndo />}
-                $bgColor={({ theme }) => theme.colors.green}
+                $bgColor={({ theme }) => theme.colors.status.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton
                 icon={<FaTrashAlt />}
-                $bgColor={({ theme }) => theme.colors.red}
+                $bgColor={({ theme }) => theme.colors.accent.primary}
                 onClick={() => deleteTask(task.key)}
               />
             </>

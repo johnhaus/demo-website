@@ -5,8 +5,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-    color: ${({ theme }) => theme.colors.textSecondary};
-    background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+    color: ${({ theme }) => theme.colors.text.onCanvas};
+    background-color: ${({ theme }) => theme.colors.background.canvas};
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

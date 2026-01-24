@@ -11,7 +11,7 @@ const NavLinks = styled.nav`
 
     @media (max-width: 768px) {
       flex-direction: column;
-      background-color: ${({ theme }) => theme.colors.red};
+      background-color: ${({ theme }) => theme.colors.accent.primary};
       position: fixed;
       top: 70px;
       right: 0;
@@ -43,12 +43,12 @@ const NavLinks = styled.nav`
 
       &:hover {
         background-color: ${({ theme }) =>
-          theme.colors.alwaysWhiteHoverTransparent};
+          theme.colors.action.hoverTransparent};
       }
 
       &:active {
         background-color: ${({ theme }) =>
-          theme.colors.alwaysWhiteHoverTransparent};
+          theme.colors.action.hoverTransparent};
         transform: scale(0.98);
       }
 

@@ -14,9 +14,9 @@ const LoginContainer = styled.div`
   width: 90%;
   max-width: 600px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  color: ${({ theme }) => theme.colors.textPrimary};
-  box-shadow: 0 0px 12px ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.background.surface};
+  color: ${({ theme }) => theme.colors.text.onSurface};
+  box-shadow: 0 0px 12px ${({ theme }) => theme.colors.emphasis.high};
   margin-bottom: 24px;
 `;
 
@@ -29,7 +29,7 @@ const StatusContainer = styled(LoginContainer)`
 `;
 
 const ErrorContainer = styled.div`
-  color: ${({ theme }) => theme.colors.errorRed};
+  color: ${({ theme }) => theme.colors.status.error};
 `;
 
 const InputWrapper = styled.div`
@@ -48,11 +48,11 @@ const Input = styled.input`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.lightGrey};
+  border: 1px solid ${({ theme }) => theme.colors.border.subtle};
   font-size: 16px;
 
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.colors.black};
+    outline: 1px solid ${({ theme }) => theme.colors.focus.ring};
   }
 `;
 

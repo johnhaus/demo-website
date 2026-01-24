@@ -12,21 +12,21 @@ const HeaderWrapper = styled.header`
   align-items: center;
   padding: 20px;
   height: 40px;
-  background-color: ${({ theme }) => theme.colors.red};
+  background-color: ${({ theme }) => theme.colors.accent.primary};
 `;
 
 const HomeNavLink = styled(NavLink)`
   text-decoration: none;
   font-size: 18px;
-  color: ${({ theme }) => theme.colors.alwaysWhite};
+  color: ${({ theme }) => theme.colors.text.fixed};
   transition: all 0.3s ease;
   display: block;
   width: 100%;
 
   &:hover {
     text-shadow:
-      0 0 20px ${({ theme }) => theme.colors.alwaysWhiteHover};,
-      0 0 25px ${({ theme }) => theme.colors.alwaysWhiteHover};,
+      0 0 20px ${({ theme }) => theme.colors.action.hover};,
+      0 0 25px ${({ theme }) => theme.colors.action.hover};,
   }
 `;
 
