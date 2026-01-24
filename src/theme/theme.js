@@ -40,7 +40,7 @@ export const darkTheme = {
     focus: {
       ring: palette.black,
     },
-     control: {
+    control: {
       background: palette.white,
     },
   },
