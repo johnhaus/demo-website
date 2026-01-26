@@ -9,8 +9,8 @@ const navLinkStyles = css`
 
   &:hover {
     text-shadow:
-      0 0 20px ${({ theme }) => theme.colors.action.hover},
-      0 0 25px ${({ theme }) => theme.colors.action.hover};
+      0 0 20px ${({ theme }) => theme.colors.action.hoverFixed},
+      0 0 25px ${({ theme }) => theme.colors.action.hoverFixed};
   }
 
   @media (max-width: 768px) {

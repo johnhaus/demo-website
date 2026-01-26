@@ -13,11 +13,13 @@ export const darkTheme = {
     },
     action: {
       hover: palette.white91,
-      hoverTransparent: palette.white10,
+      hoverSubtle: palette.white10,
+      hoverFixed: palette.white91,
       active: palette.white20,
     },
-    status: {
-      error: palette.red900,
+    // Button colors and error/success messaging
+    intent: {
+      destructive: palette.red900,
       warning: palette.orange600,
       success: palette.green700,
     },
@@ -29,6 +31,7 @@ export const darkTheme = {
     },
     border: {
       strong: palette.black,
+      inverseStrong: palette.white,
       subtle: palette.black10,
     },
     // Box-shadow colors
@@ -58,9 +61,15 @@ export const lightTheme = {
       fixed: palette.white,
     },
     action: {
-      hover: palette.white91,
-      hoverTransparent: palette.white10,
+      hover: palette.black91,
+      hoverSubtle: palette.white10,
+      hoverFixed: palette.white91,
       active: palette.white20,
+    },
+    intent: {
+      destructive: palette.red300,
+      warning: palette.orange600,
+      success: palette.green700,
     },
     status: {
       error: palette.red300,
@@ -74,6 +83,8 @@ export const lightTheme = {
       primary: palette.red900,
     },
     border: {
+      strong: palette.black,
+      inverseStrong: palette.black,
       subtle: palette.black10,
     },
     emphasis: {

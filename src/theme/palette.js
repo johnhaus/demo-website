@@ -13,6 +13,7 @@ const palette = {
   green100: '#d3f9d8',
 
   black10: 'rgba(0, 0, 0, 0.1)',
+  black91: 'rgba(0, 0, 0, 0.91)',
 };
 
 export default palette;

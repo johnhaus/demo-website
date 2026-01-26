@@ -174,7 +174,7 @@ const TodoList = () => {
               />
               <RoundButton
                 icon={<FaCheck />}
-                $bgColor={({ theme }) => theme.colors.status.success}
+                $bgColor={({ theme }) => theme.colors.intent.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton
@@ -199,7 +199,7 @@ const TodoList = () => {
               />
               <RoundButton
                 icon={<FaCheck />}
-                $bgColor={({ theme }) => theme.colors.status.success}
+                $bgColor={({ theme }) => theme.colors.intent.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton
@@ -218,7 +218,7 @@ const TodoList = () => {
             <>
               <RoundButton
                 icon={<FaUndo />}
-                $bgColor={({ theme }) => theme.colors.status.success}
+                $bgColor={({ theme }) => theme.colors.intent.success}
                 onClick={() => toggleCompletion(task.key)}
               />
               <RoundButton

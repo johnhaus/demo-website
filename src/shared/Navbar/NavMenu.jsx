@@ -43,12 +43,12 @@ const NavLinks = styled.nav`
 
       &:hover {
         background-color: ${({ theme }) =>
-          theme.colors.action.hoverTransparent};
+          theme.colors.action.hoverSubtle};
       }
 
       &:active {
         background-color: ${({ theme }) =>
-          theme.colors.action.hoverTransparent};
+          theme.colors.action.hoverSubtle};
         transform: scale(0.98);
       }
 

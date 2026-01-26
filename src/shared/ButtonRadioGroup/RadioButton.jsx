@@ -16,7 +16,7 @@ const Button = styled(StyledButton)`
 
   opacity: ${({ $checked }) => ($checked ? 1 : 0.6)};
   border: 2px solid
-    ${({ $checked, theme }) => ($checked ? theme.colors.white : 'transparent')};
+    ${({ $checked, theme }) => ($checked ? theme.colors.border.inverseStrong : 'transparent')};
 `;
 
 export default function RadioButton({
