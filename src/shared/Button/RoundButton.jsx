@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  background-color: ${({ $bgColor, theme }) => $bgColor || theme.colors.control.background};
+  background-color: ${({ $bgColor, theme }) =>
+    $bgColor || theme.colors.control.background};
   color: ${({ theme }) => theme.colors.text.fixed};
 
   border: none;
@@ -26,14 +27,10 @@ const StyledButton = styled.button`
           : theme.colors.control.background
       };
       color: ${
-        $priority
-          ? theme.colors.text.fixed
-          : theme.colors.intent.warning
+        $priority ? theme.colors.text.fixed : theme.colors.intent.warning
       };
       border: ${
-        $priority
-          ? 'none'
-          : `2px solid ${theme.colors.intent.warning}`
+        $priority ? 'none' : `2px solid ${theme.colors.intent.warning}`
       };
     `}
 `;
