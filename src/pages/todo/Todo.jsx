@@ -24,7 +24,7 @@ const TodoWrapper = styled.div`
   border-radius: 8px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 0px 8px ${({ theme }) => theme.colors.focus.ring};
+  box-shadow: 0 0px 12px ${({ theme }) => theme.colors.emphasis.high};
 `;
 
 const InputWrapper = styled.div`
