@@ -57,7 +57,11 @@ const CheckboxWrapper = styled.div`
 `;
 
 const CheckboxInput = styled.input`
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
 
   &:checked + label .checkmark {
     background-color: ${({ theme }) => theme.colors.accent.primary};
@@ -72,6 +76,10 @@ const CheckboxInput = styled.input`
     transform: translate(-50%, -50%);
     color: ${({ theme }) => theme.colors.text.fixedLight};
     font-size: 16px;
+  }
+
+  &:focus-visible + label .checkmark {
+    outline: 1px solid ${({ theme }) => theme.colors.focus.ring};
   }
 `;
 
