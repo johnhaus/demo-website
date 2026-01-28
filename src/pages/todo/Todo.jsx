@@ -42,7 +42,7 @@ const Input = styled.input`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.border.subtle};
+  border: none;
   font-size: 16px;
 
   &:focus {
@@ -61,7 +61,7 @@ const CheckboxInput = styled.input`
 
   &:checked + label .checkmark {
     background-color: ${({ theme }) => theme.colors.accent.primary};
-    border-color: ${({ theme }) => theme.colors.border.strong};
+    border: 1px solid ${({ theme }) => theme.colors.border.strong};
   }
 
   &:checked + label .checkmark::after {
@@ -86,7 +86,6 @@ const CheckboxLabel = styled.label`
     top: 0;
     width: 20px;
     height: 20px;
-    border: 1px solid ${({ theme }) => theme.colors.border.subtle};
     border-radius: 4px;
     background-color: ${({ theme }) => theme.colors.control.background};
   }

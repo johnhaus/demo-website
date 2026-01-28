@@ -25,11 +25,11 @@ const SearchInput = styled.input`
   min-width: 180px;
   height: 40px;
   border-radius: 5px;
-  border: 2px solid ${({ theme }) => theme.colors.border.subtle};
+  border: 1px solid ${({ theme }) => theme.colors.border.subtle};
   font-size: 16px;
 
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.colors.focus.ring};
+    outline: 1px solid ${({ theme }) => theme.colors.border.inverseStrong};
   }
 `;
 

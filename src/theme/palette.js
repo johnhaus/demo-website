@@ -4,7 +4,6 @@ const palette = {
 
   white91: 'rgba(255, 255, 255, 0.91)',
   white10: 'rgba(255, 255, 255, 0.1)',
-  white20: 'rgba(255, 255, 255, 0.2)',
 
   red300: '#ff6b6b',
   red900: '#8b0000',

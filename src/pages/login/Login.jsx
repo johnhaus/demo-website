@@ -48,7 +48,7 @@ const Input = styled.input`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.border.subtle};
+  border: none;
   font-size: 16px;
 
   &:focus {
