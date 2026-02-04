@@ -55,7 +55,7 @@ const Header = () => {
   }, []);
 
   const handleNavigate = (path) => {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = useBreakpoint('mobile');
     navigate(path);
     if (isMobile) setMenuOpen(false);
   };

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import styled from 'styled-components';
 import navLinkStyles from '../../styles/navLinkStyles';
+import useBreakpoint from '../../hooks/useBreakpoint';
 
 const NavLinks = styled.nav`
   pointer-events: ${({ open }) => (open ? 'auto' : 'auto')};
@@ -102,7 +103,7 @@ const IconWrapper = styled.div`
 `;
 
 const NavMenu = ({ open, navItems, onNavigate }) => {
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = useBreakpoint('mobile');
   const tabIndex = isMobile && !open ? -1 : undefined;
 
   return (
