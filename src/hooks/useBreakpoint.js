@@ -5,8 +5,8 @@ const useBreakpoint = (key) => {
   const theme = useTheme();
   const query = `(max-width: ${theme.breakpoints[key]})`;
 
-  const [matches, setMatches] = useState(() =>
-    window.matchMedia(query).matches
+  const [matches, setMatches] = useState(
+    () => window.matchMedia(query).matches
   );
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { FaGithub } from 'react-icons/fa';
 import styled from 'styled-components';
 import Hamburger from './Hamburger';
 import NavMenu from './NavMenu';
+import useBreakpoint from '../../hooks/useBreakpoint';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -34,6 +35,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const isMobile = useBreakpoint('mobile');
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -55,10 +57,11 @@ const Header = () => {
   }, []);
 
   const handleNavigate = (path) => {
-    const isMobile = useBreakpoint('mobile');
     navigate(path);
     if (isMobile) setMenuOpen(false);
   };
+
+  const tabIndex = !isMobile || menuOpen ? undefined : -1;
 
   return (
     <HeaderWrapper>
@@ -75,6 +78,8 @@ const Header = () => {
           open={menuOpen}
           navItems={navItems}
           onNavigate={handleNavigate}
+          tabIndex={tabIndex}
+          isMobile={isMobile}
         />
       </div>
     </HeaderWrapper>

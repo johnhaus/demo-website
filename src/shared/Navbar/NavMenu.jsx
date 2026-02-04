@@ -1,14 +1,8 @@
 import { NavLink } from 'react-router';
 import styled from 'styled-components';
 import navLinkStyles from '../../styles/navLinkStyles';
-import useBreakpoint from '../../hooks/useBreakpoint';
 
 const NavLinks = styled.nav`
-  pointer-events: ${({ open }) => (open ? 'auto' : 'auto')};
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
-  }
-
   ul {
     display: flex;
     list-style: none;
@@ -28,6 +22,7 @@ const NavLinks = styled.nav`
       transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
       opacity: ${({ open }) => (open ? 1 : 0)};
       transition: all 0.35s ease-in-out;
+      pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
     }
   }
 
@@ -57,29 +52,6 @@ const NavLinks = styled.nav`
           theme.colors.action.hoverSubtleFixed};
         transform: scale(0.98);
       }
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 0;
-        height: 0;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          width 0.4s ease,
-          height 0.4s ease,
-          opacity 0.4s ease;
-      }
-
-      &:active::after {
-        width: 200%;
-        height: 200%;
-        opacity: 0;
-        transition: 0s;
-      }
     }
   }
 `;
@@ -102,45 +74,42 @@ const IconWrapper = styled.div`
   }
 `;
 
-const NavMenu = ({ open, navItems, onNavigate }) => {
-  const isMobile = useBreakpoint('mobile');
-  const tabIndex = isMobile && !open ? -1 : undefined;
+const NavMenu = ({ open, navItems, onNavigate, tabIndex, isMobile }) => (
+  <NavLinks open={open} aria-hidden={isMobile && !open} id="nav-menu">
+    <ul>
+      {navItems.map((item) => {
+        const Icon = item.icon;
 
-  return (
-    <NavLinks open={open} aria-hidden={isMobile && !open}>
-      <ul>
-        {navItems.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <li key={item.name}>
-              {item.external ? (
-                <StyledExternalLink
-                  href={item.path}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.name}
-                  tabIndex={tabIndex}
-                >
+        return (
+          <li key={item.name}>
+            {item.external ? (
+              <StyledExternalLink
+                href={item.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.name}
+                tabIndex={tabIndex}
+              >
+                {Icon && (
                   <IconWrapper>
                     <Icon />
                   </IconWrapper>
-                </StyledExternalLink>
-              ) : (
-                <StyledNavLink
-                  to={item.path}
-                  onClick={() => onNavigate(item.path)}
-                  tabIndex={tabIndex}
-                >
-                  {item.name}
-                </StyledNavLink>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </NavLinks>
-  );
-};
+                )}
+              </StyledExternalLink>
+            ) : (
+              <StyledNavLink
+                to={item.path}
+                onClick={() => onNavigate(item.path)}
+                tabIndex={tabIndex}
+              >
+                {item.name}
+              </StyledNavLink>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </NavLinks>
+);
 
 export default NavMenu;
