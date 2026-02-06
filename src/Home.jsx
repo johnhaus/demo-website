@@ -40,7 +40,7 @@ function Home() {
     <>
       <MainLayout>
         <Intro>
-          <h2>Welcome to my React and Vite demo page</h2>
+          <h2>A showcase of interactive UI built with React and Vite</h2>
         </Intro>
         <CardContainer>
           <Card to={'./todo'} title={'Todo List'}>
@@ -53,11 +53,10 @@ function Home() {
             not intended to store sensitive information.
           </Card>
           <Card to={'./posts-explorer'} title={'Posts Explorer'}>
-            This feature is currently being built. Check back soon.
-            {/*A demo component that fetches and displays user posts with search, filtering, and comments.
+            A demo component that fetches and displays user posts with search.
             <SmallText>
               <small>Data provided by: jsonplaceholder.typicode.com</small>
-            </SmallText>*/}
+            </SmallText>
           </Card>
           <Card to={'./page4'} title={'In Development'}>
             This feature is currently being built. Check back soon.

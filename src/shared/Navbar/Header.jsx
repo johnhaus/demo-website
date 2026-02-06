@@ -38,7 +38,6 @@ const Header = () => {
   const isMobile = useBreakpoint('mobile');
 
   const navItems = [
-    { name: 'Home', path: '/' },
     { name: 'Settings', path: '/settings' },
     {
       name: 'GitHub',
@@ -66,7 +65,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <div>
-        <HomeNavLink to="/">Demo Website</HomeNavLink>
+        <HomeNavLink to="/">UI Showcase</HomeNavLink>
       </div>
       <div ref={menuRef}>
         <Hamburger
