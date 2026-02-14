@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import RoundButton from '../../shared/Button/RoundButton';
-import Button from '../../shared/Button/Button';
+import RoundButton from '../../shared/button/RoundButton';
+import Button from '../../shared/button/Button';
 import { FaTrashAlt, FaCheck, FaExclamation, FaUndo } from 'react-icons/fa';
 import TodoSection from './TodoSection';
 import {

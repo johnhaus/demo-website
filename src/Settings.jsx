@@ -1,4 +1,4 @@
-import ButtonRadioGroup from './shared/ButtonRadioGroup/ButtonRadioGroup';
+import ButtonRadioGroup from './shared/button-radio-group/ButtonRadioGroup';
 import { usePreferences } from './preferences/usePreferences';
 import styled from 'styled-components';
 

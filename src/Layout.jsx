@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import Header from './shared/navbar/header';
+import Header from './shared/navbar/Header';
 import styled from 'styled-components';
 
 const LayoutContainer = styled.div`

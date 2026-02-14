@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { cardStyles } from '../../styles/cardStyles';
-import Button from '../../shared/Button/Button';
+import Button from '../../shared/button/Button';
 
 const Container = styled.div`
   display: flex;

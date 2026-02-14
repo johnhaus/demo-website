@@ -7,7 +7,7 @@ import Home from './Home';
 import Settings from './Settings';
 import Todo from './pages/todo/Todo';
 import Login from './pages/login/Login';
-import PostsExplorer from './pages/PostsExplorer/PostsExplorer';
+import PostsExplorer from './pages/posts-explorer/PostsExplorer';
 import Page4 from './pages/Page4';
 import { PreferencesProvider } from './preferences/PreferencesProvider';
 import { usePreferences } from './preferences/usePreferences';
