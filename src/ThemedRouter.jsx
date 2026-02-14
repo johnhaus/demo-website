@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { HashRouter, Routes, Route } from 'react-router';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 import { lightTheme, darkTheme } from './theme/theme.js';
@@ -18,7 +18,7 @@ export default function ThemedRouter() {
   const resolvedTheme = useResolvedTheme(theme);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider theme={resolvedTheme === 'dark' ? darkTheme : lightTheme}>
         <GlobalStyles />
         <Routes>
@@ -32,6 +32,6 @@ export default function ThemedRouter() {
           </Route>
         </Routes>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
