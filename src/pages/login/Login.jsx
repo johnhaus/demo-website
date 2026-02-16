@@ -63,6 +63,23 @@ const ButtonColumn = styled.div`
   gap: 12px;
 `;
 
+/**
+ * ⚠️ DEMO-ONLY AUTHENTICATION
+ *
+ * This component intentionally stores credentials in localStorage
+ * for demonstration purposes only.
+ *
+ * This is NOT secure:
+ * - Passwords are stored in plain text
+ * - localStorage is accessible via JavaScript (XSS risk)
+ * - There is no hashing, encryption, or backend validation
+ *
+ * In a real application:
+ * - Authentication must be handled server-side
+ * - Passwords should be hashed and never stored in the browser
+ * - Use secure HTTP-only cookies or proper token handling
+ */
+
 const Login = () => {
   const [userNameText, setUserNameText] = useState('');
   const [passwordText, setPasswordText] = useState('');
@@ -98,9 +115,9 @@ const Login = () => {
     typeof value === 'string' && /^\S+$/.test(value);
 
   const updateCredentials = () => {
-    const username = userNameText?.trim();
-    const password = passwordText?.trim();
-    const retype = retypePasswordText?.trim();
+    const username = userNameText.trim();
+    const password = passwordText.trim();
+    const retype = retypePasswordText.trim();
 
     if (!isValidText(username)) {
       setError('Invalid username');
@@ -116,8 +133,8 @@ const Login = () => {
       setError('Passwords do not match');
       return;
     }
-    localStorage.setItem('username', userNameText);
-    localStorage.setItem('password', passwordText);
+    localStorage.setItem('username', username);
+    localStorage.setItem('password', password);
     clearFields();
     goBack();
     accountLogout();
@@ -136,11 +153,12 @@ const Login = () => {
     const userName = localStorage.getItem('username');
     const password = localStorage.getItem('password');
 
-    !loggedIn && (userName || password)
-      ? setError(
-          'An account already exists, please login or reset your account'
-        )
-      : setChangeCredentials(true);
+    if (!loggedIn && (userName || password)) {
+      setError('An account already exists, please login or reset your account...');
+      return;
+    }
+
+    setChangeCredentials(true);
   };
 
   const resetAccount = () => {
@@ -159,7 +177,7 @@ const Login = () => {
 
   return (
     <Container>
-      <StatusContainer>{loggedIn ? 'Logged in' : 'Logged out'}</StatusContainer>
+      <StatusContainer>{loggedIn ? `Logged in as ${localStorage.getItem('username')}` : 'Logged out'}</StatusContainer>
       <LoginContainer>
         <InputWrapper>
           {(!loggedIn || changeCredentials) && (
@@ -182,7 +200,7 @@ const Login = () => {
               />
               {changeCredentials && (
                 <>
-                  <Label htmlFor="retype password">Retype Password</Label>
+                  <Label htmlFor="retypePassword">Retype Password</Label>
                   <Input
                     type="password"
                     id="retypePassword"
@@ -199,13 +217,13 @@ const Login = () => {
           {loggedIn && changeCredentials && (
             <ButtonColumn>
               <Button
-                onClick={() => updateCredentials()}
+                onClick={updateCredentials}
                 text="Update"
                 size="sm"
               />
-              <Button onClick={() => goBack()} text="Back" size="sm" />
+              <Button onClick={goBack} text="Back" size="sm" />
               <Button
-                onClick={() => resetAccount()}
+                onClick={resetAccount}
                 text="Delete Account"
                 size="sm"
               />
@@ -214,14 +232,14 @@ const Login = () => {
 
           {!loggedIn && !changeCredentials && (
             <ButtonColumn>
-              <Button onClick={() => accountLogin()} text="Login" size="sm" />
+              <Button onClick={accountLogin} text="Login" size="sm" />
               <Button
-                onClick={() => changeAccountCredentials()}
+                onClick={changeAccountCredentials}
                 text="Create An Account"
                 size="sm"
               />
               <Button
-                onClick={() => resetAccount()}
+                onClick={resetAccount}
                 text="Reset Account"
                 size="sm"
               />
@@ -231,19 +249,19 @@ const Login = () => {
           {!loggedIn && changeCredentials && (
             <ButtonColumn>
               <Button
-                onClick={() => updateCredentials()}
+                onClick={updateCredentials}
                 text="Create Account"
                 size="sm"
               />
-              <Button onClick={() => goBack()} text="Back" size="sm" />
+              <Button onClick={goBack} text="Back" size="sm" />
             </ButtonColumn>
           )}
 
           {loggedIn && !changeCredentials && (
             <ButtonColumn>
-              <Button onClick={() => accountLogout()} text="Logout" size="sm" />
+              <Button onClick={accountLogout} text="Logout" size="sm" />
               <Button
-                onClick={() => changeAccountCredentials()}
+                onClick={changeAccountCredentials}
                 text="Update Account"
                 size="sm"
               />
