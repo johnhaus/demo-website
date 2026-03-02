@@ -28,8 +28,11 @@ const StatusContainer = styled(LoginContainer)`
   align-items: center;
 `;
 
-const ErrorContainer = styled.div`
-  color: ${({ theme }) => theme.colors.intent.destructive};
+const FeedbackContainer = styled.div`
+  color: ${({ theme, type }) =>
+    type === 'error'
+      ? theme.colors.intent.destructive
+      : theme.colors.intent.success};
 `;
 
 const InputWrapper = styled.form`
@@ -80,7 +83,7 @@ const initialState = {
   mode: MODES.LOGIN,
   account: null,
   form: { ...emptyForm },
-  error: '',
+  feedback: null,
 };
 
 function authReducer(state, action) {
@@ -89,7 +92,7 @@ function authReducer(state, action) {
       return {
         ...state,
         mode: action.payload,
-        error: '',
+        feedback: null,
       };
 
     case 'SET_ACCOUNT':
@@ -103,7 +106,7 @@ function authReducer(state, action) {
         ...state,
         mode: MODES.LOGGED_IN,
         form: { ...emptyForm },
-        error: '',
+        feedback: null,
       };
 
     case 'UPDATE_FIELD':
@@ -113,28 +116,28 @@ function authReducer(state, action) {
           ...state.form,
           [action.field]: action.value,
         },
-        error: '',
+        feedback: null,
       };
 
     case 'UPDATE_ACCOUNT':
       return {
         ...state,
-        account: action.payload,
+        account: action.payload.account,
         mode: MODES.LOGIN,
         form: { ...emptyForm },
-        error: 'Changes saved, please log in to continue',
+        feedback: {
+          type: action.payload.type,
+          message: action.payload.message,
+        },
       };
 
-    case 'SET_ERROR':
+    case 'SET_FEEDBACK':
       return {
         ...state,
-        error: action.payload,
-      };
-
-    case 'CLEAR_FORM':
-      return {
-        ...state,
-        form: { ...emptyForm },
+        feedback: {
+          type: action.payload.type,
+          message: action.payload.message,
+        },
       };
 
     case 'RESET_ACCOUNT':
@@ -143,7 +146,10 @@ function authReducer(state, action) {
         account: null,
         mode: MODES.LOGIN,
         form: { ...emptyForm },
-        error: 'Your account has been deleted',
+        feedback: {
+          type: action.payload.type,
+          message: action.payload.message,
+        },
       };
 
     default:
@@ -170,7 +176,7 @@ function authReducer(state, action) {
 
 const Login = () => {
   const [state, dispatch] = useReducer(authReducer, initialState);
-  const { mode, account, form, error } = state;
+  const { mode, account, form, feedback } = state;
 
   useEffect(() => {
     const stored = localStorage.getItem('account');
@@ -190,8 +196,11 @@ const Login = () => {
   const accountLogin = () => {
     if (!account) {
       dispatch({
-        type: 'SET_ERROR',
-        payload: 'No account found, please create an account',
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'No account found, please create an account',
+        },
       });
       return;
     }
@@ -203,8 +212,11 @@ const Login = () => {
       dispatch({ type: 'LOGIN_SUCCESS' });
     } else {
       dispatch({
-        type: 'SET_ERROR',
-        payload: 'Invalid credentials, please try again',
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'Invalid credentials, please try again',
+        },
       });
     }
   };
@@ -215,31 +227,58 @@ const Login = () => {
     const retype = form.retype.trim();
 
     if (!isValidText(username)) {
-      dispatch({ type: 'SET_ERROR', payload: 'Invalid username' });
+      dispatch({
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'Invalid username',
+        },
+      });
       return;
     }
 
     if (!isValidText(password)) {
-      dispatch({ type: 'SET_ERROR', payload: 'Invalid password' });
+      dispatch({
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'Invalid password',
+        },
+      });
       return;
     }
 
     if (password !== retype) {
-      dispatch({ type: 'SET_ERROR', payload: 'Passwords do not match' });
+      dispatch({
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'Passwords do not match',
+        },
+      });
       return;
     }
     const newAccount = { username, password };
 
     localStorage.setItem('account', JSON.stringify(newAccount));
-    dispatch({ type: 'UPDATE_ACCOUNT', payload: newAccount });
+      dispatch({
+        type: 'UPDATE_ACCOUNT',
+        payload: {
+          account: newAccount,
+          type: 'success',
+          message: 'Changes saved, please log in to continue',
+        },
+      });
   };
 
   const changeAccountCredentials = () => {
-    if (mode !== MODES.LOGGED_IN && account) {
+    if (account && mode !== MODES.LOGGED_IN) {
       dispatch({
-        type: 'SET_ERROR',
-        payload:
-          'An account already exists, please login or reset your account...',
+        type: 'SET_FEEDBACK',
+        payload: {
+          type: 'error',
+          message: 'An account already exists, please login or reset your account...',
+        },
       });
       return;
     }
@@ -252,7 +291,13 @@ const Login = () => {
 
   const resetAccount = () => {
     localStorage.removeItem('account');
-    dispatch({ type: 'RESET_ACCOUNT' });
+    dispatch({
+        type: 'RESET_ACCOUNT',
+        payload: {
+          type: 'success',
+          message: 'Your account has been successfully deleted',
+        },
+      });
   };
 
   const accountLogout = () => {
@@ -339,18 +384,25 @@ const Login = () => {
                   />
                 </>
               )}
-              {error && <ErrorContainer>{error}</ErrorContainer>}
             </>
+          )}
+
+          {feedback && (
+            <FeedbackContainer type={feedback.type}>
+              {feedback.message}
+            </FeedbackContainer>
           )}
 
           {mode === MODES.LOGIN && (
             <ButtonColumn>
               <Button type="submit" text="Login" size="sm" />
-              <Button
-                onClick={changeAccountCredentials}
-                text="Create An Account"
-                size="sm"
-              />
+              {!account && (
+                <Button
+                  onClick={changeAccountCredentials}
+                  text="Create An Account"
+                  size="sm"
+                />
+              )}
               {account && (
                 <Button onClick={resetAccount} text="Reset Account" size="sm" />
               )}
