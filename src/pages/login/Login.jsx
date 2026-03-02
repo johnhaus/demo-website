@@ -261,14 +261,14 @@ const Login = () => {
     const newAccount = { username, password };
 
     localStorage.setItem('account', JSON.stringify(newAccount));
-      dispatch({
-        type: 'UPDATE_ACCOUNT',
-        payload: {
-          account: newAccount,
-          type: 'success',
-          message: 'Changes saved, please log in to continue',
-        },
-      });
+    dispatch({
+      type: 'UPDATE_ACCOUNT',
+      payload: {
+        account: newAccount,
+        type: 'success',
+        message: 'Changes saved, please log in to continue',
+      },
+    });
   };
 
   const changeAccountCredentials = () => {
@@ -277,7 +277,8 @@ const Login = () => {
         type: 'SET_FEEDBACK',
         payload: {
           type: 'error',
-          message: 'An account already exists, please login or reset your account...',
+          message:
+            'An account already exists, please login or reset your account...',
         },
       });
       return;
@@ -292,12 +293,12 @@ const Login = () => {
   const resetAccount = () => {
     localStorage.removeItem('account');
     dispatch({
-        type: 'RESET_ACCOUNT',
-        payload: {
-          type: 'success',
-          message: 'Your account has been successfully deleted',
-        },
-      });
+      type: 'RESET_ACCOUNT',
+      payload: {
+        type: 'success',
+        message: 'Your account has been successfully deleted',
+      },
+    });
   };
 
   const accountLogout = () => {
