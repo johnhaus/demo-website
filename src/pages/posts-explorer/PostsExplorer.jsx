@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { cardStyles } from '../../styles/cardStyles';
 import Button from '../../shared/button/Button';
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 const Container = styled.div`
   display: flex;
@@ -104,7 +105,6 @@ const actionTypes = {
   SET_LOADING: 'SET_LOADING',
   SET_ERROR: 'SET_ERROR',
   SET_POSTS: 'SET_POSTS',
-  SET_PAGE: 'SET_PAGE',
   SET_HAS_MORE: 'SET_HAS_MORE',
   SET_SEARCH_INPUT: 'SET_SEARCH_INPUT',
   SET_ACTIVE_QUERY: 'SET_ACTIVE_QUERY',
@@ -123,9 +123,8 @@ const reducer = (state, action) => {
           state.page === 1
             ? action.payload
             : [...state.posts, ...action.payload],
+            page: state.page + 1,
       };
-    case actionTypes.SET_PAGE:
-      return { ...state, page: action.payload };
     case actionTypes.SET_HAS_MORE:
       return { ...state, hasMore: action.payload };
     case actionTypes.SET_SEARCH_INPUT:
@@ -149,8 +148,6 @@ function PostsExplorer() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { posts, loading, error, page, hasMore, searchInput, activeQuery } =
     state;
-
-  const loadMoreRef = useRef(null);
 
   const fetchPosts = useCallback(async () => {
     if (loading || !hasMore || error) return;
@@ -177,7 +174,6 @@ function PostsExplorer() {
       }
 
       dispatch({ type: actionTypes.SET_POSTS, payload: response.data });
-      dispatch({ type: actionTypes.SET_PAGE, payload: page + 1 });
     } catch (err) {
       console.error('Failed to load posts:', err);
 
@@ -190,23 +186,11 @@ function PostsExplorer() {
     }
   }, [page, loading, hasMore, error, activeQuery]);
 
-  useEffect(() => {
-    const node = loadMoreRef.current;
-    if (!node || !hasMore) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !loading) {
-          fetchPosts();
-        }
-      },
-      { rootMargin: '100px' }
-    );
-
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, [fetchPosts, loading, hasMore]);
+  const loadMoreRef = useInfiniteScroll({
+    hasMore,
+    loading,
+    onLoadMore: fetchPosts,
+  });
 
   const handleSearchChange = (e) => {
     dispatch({
